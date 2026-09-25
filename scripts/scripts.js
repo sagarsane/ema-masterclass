@@ -31,17 +31,18 @@ export function getContentRoot() {
     while (root.length > 0 && ['blog'].includes(root[root.length - 1])) {
       root.pop();
     }
-    return `/${root.join('/')}`;
+    // Empty root must stay '' — '/' would yield '//nav', a protocol-relative URL
+    return root.length ? `/${root.join('/')}` : '';
   }
   return '';
 }
 
 /** Shared brand logo SVG + text used by header and footer */
 export const BRAND_LOGO = `<span class="nav-logo-icon" aria-hidden="true">
-  <svg width="100%" height="100%" viewBox="0 0 33 33" preserveAspectRatio="xMidYMid meet">
-    <path d="M28,0H5C2.24,0,0,2.24,0,5v23c0,2.76,2.24,5,5,5h23c2.76,0,5-2.24,5-5V5c0-2.76-2.24-5-5-5ZM29,17c-6.63,0-12,5.37-12,12h-1c0-6.63-5.37-12-12-12v-1c6.63,0,12-5.37,12-12h1c0,6.63,5.37,12,12,12v1Z" fill="currentColor"/>
+  <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+    <path d="M14.2 1.5 4.5 13.6h6.1l-1.4 8.9 10.3-12.8h-6.3l1-8.2Z" fill="currentColor"/>
   </svg>
-</span><span class="nav-logo-text">WKND<br>Adventures</span>`;
+</span><span class="nav-logo-text">Rockstar<br>Adventures</span>`;
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -277,7 +278,7 @@ function decorateTabSections(main) {
     tablist.className = 'tabs-list';
     tablist.setAttribute('role', 'tablist');
 
-    // Sliding indicator (hidden until first interaction, CSS box-shadow handles default)
+    // Sliding indicator (hidden until first interaction, CSS background handles default)
     const indicator = document.createElement('div');
     indicator.className = 'tabs-indicator';
 

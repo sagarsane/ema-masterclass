@@ -1,3 +1,4 @@
+/* eslint-disable */
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -22,14 +23,28 @@ var CustomImportScript = (() => {
   __export(import_footer_exports, {
     default: () => import_footer_default
   });
-  var BASE = "/content/wknd/";
+
+  // tools/importer/transformers/brand.js
+  var BRAND_NAME = "Rockstar Adventures";
+  var TEXT_RULES = [
+    [/wknd-adventures\.com/gi, "rockstar-adventures.com"],
+    [/WKND Adventures/gi, BRAND_NAME],
+    [/\bWKND\b/g, "Rockstar"]
+  ];
+  function rebrandText(value) {
+    if (!value) return value;
+    return TEXT_RULES.reduce((out, [pattern, replacement]) => out.replace(pattern, replacement), value);
+  }
+
+  // tools/importer/import-footer.js
+  var BASE = "/";
   function rewriteHref(href) {
     if (!href) return href;
     try {
       const p = new URL(href, "https://wknd-adventures.com").pathname.replace(/\/$/, "").replace(/\.html$/, "").replace(/^\//, "");
       if (!p || p === "index") return BASE.slice(0, -1) + "/";
       return BASE + p;
-    } catch {
+    } catch (e) {
       return href;
     }
   }
@@ -50,13 +65,13 @@ var CustomImportScript = (() => {
             const brandP = document.createElement("p");
             const brandA = document.createElement("a");
             brandA.href = rewriteHref("/");
-            brandA.textContent = "WKND Adventures";
+            brandA.textContent = BRAND_NAME;
             brandP.appendChild(brandA);
             colDiv.appendChild(brandP);
             const tagline = col.querySelector("p");
             if (tagline) {
               const tagP = document.createElement("p");
-              tagP.textContent = tagline.textContent.trim();
+              tagP.textContent = rebrandText(tagline.textContent.trim());
               colDiv.appendChild(tagP);
             }
           } else {
@@ -90,10 +105,11 @@ var CustomImportScript = (() => {
         const paragraphs = footerBottom.querySelectorAll("p");
         paragraphs.forEach((p) => {
           const newP = document.createElement("p");
-          newP.textContent = p.textContent.trim();
+          newP.textContent = rebrandText(p.textContent.trim());
           bottomSection.appendChild(newP);
         });
       }
+      result.appendChild(document.createElement("hr"));
       result.appendChild(bottomSection);
       return [{
         element: result,

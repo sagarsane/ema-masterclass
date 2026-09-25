@@ -12,20 +12,18 @@ main > .hero-container {
   padding: 0;
 }
 
-/* ===== Base hero (full-bleed overlay with gradient) ===== */
+/* ===== Base hero (full-bleed overlay with brand-tinted gradient) ===== */
 
-/* Set hero button shadow color — black on hero (over image) */
 .hero {
-  --btn-shadow: var(--dark-color);
-
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-height: min(65vh, 400px);
+  min-height: min(70vh, 460px);
   padding: var(--gap-2xl) var(--gap-lg);
   overflow: hidden;
   color: var(--text-on-dark);
+  background-color: var(--background-color);
 }
 
 .hero picture {
@@ -42,13 +40,17 @@ main > .hero-container {
   height: 100%;
 }
 
-/* overlay gradient — bottom-to-top for text readability */
+/* overlay — violet/orange glow over a dark base keeps text readable (AA) on any photo */
 .hero::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(0deg, rgb(0 0 0 / 75%) 0%, rgb(0 0 0 / 45%) 40%, rgb(0 0 0 / 25%));
+  background:
+    radial-gradient(900px 520px at 85% 0%, rgb(238 90 36 / 45%) 0%, transparent 65%),
+    radial-gradient(800px 520px at 0% 20%, rgb(109 40 217 / 50%) 0%, transparent 65%),
+    linear-gradient(90deg, rgb(11 11 16 / 88%) 0%, rgb(11 11 16 / 60%) 55%, rgb(11 11 16 / 35%) 100%),
+    linear-gradient(0deg, var(--background-color) 0%, rgb(11 11 16 / 0%) 35%);
   pointer-events: none;
 }
 
@@ -67,30 +69,39 @@ main > .hero-container {
 .hero h4,
 .hero h5,
 .hero h6 {
-  color: var(--background-color);
+  color: var(--text-color);
   margin-bottom: var(--gap-lg);
-  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
+  text-shadow: 0 6px 28px rgb(0 0 0 / 35%);
 }
 
 .hero h1 {
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  max-width: 608px;
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  max-width: 760px;
 }
 
 .hero p:not(.tag-pill) {
-  color: var(--text-on-dark);
+  color: var(--text-color-muted);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
   max-width: 608px;
-  text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
 }
 
-/* eyebrow pill — uses .tag-pill utility, adds hero-specific overrides */
-.hero .tag-pill {
-  margin-bottom: var(--gap-md);
-  text-shadow: none;
+/* eyebrow — peach uppercase kicker (overrides the chip style of .tag-pill) */
+.hero p.tag-pill {
+  display: block;
+  margin: 0 0 var(--gap-sm);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--body-font-family);
+  font-size: var(--kicker-font-size);
+  font-weight: 700;
+  letter-spacing: var(--kicker-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kicker-color);
 }
 
 /* lead paragraph — after h1 */
@@ -98,14 +109,15 @@ main > .hero-container {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
-  color: var(--text-on-dark);
+  color: var(--text-color-muted);
   max-width: 608px;
   margin-bottom: var(--gap-lg);
 }
 
-/* button group — higher specificity to override .section.dark .button-group centering */
+/* button group — higher specificity to override .section.center .button-group centering */
 .section .hero .button-group {
   justify-content: flex-start;
+  gap: var(--gap-md);
 }
 
 .hero .button-wrapper {
@@ -113,67 +125,9 @@ main > .hero-container {
   margin-right: var(--gap-md);
 }
 
+.hero .button-group .button-wrapper,
 .hero .button-wrapper:last-child {
   margin-right: 0;
-}
-
-/*
- * Hero buttons — must override the global reset (main a.button:any-link)
- * which strips padding, border-radius, box-shadow, font-size, etc.
- * Specificity of reset: 0,2,1 — we use main .hero a.button:any-link (0,3,1)
- */
-main .hero a.button:any-link {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--button-border-radius);
-  padding: var(--button-padding);
-  font-family: var(--button-font-family);
-  font-size: var(--button-font-size);
-  font-weight: var(--button-font-weight);
-  letter-spacing: var(--button-letter-spacing);
-  line-height: 1.25;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--dark-color));
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-main .hero a.button:any-link:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--dark-color));
-  text-decoration: none;
-}
-
-main .hero a.button:any-link:active {
-  transform: translateY(0);
-  box-shadow: 0 0 0 var(--btn-shadow, var(--dark-color));
-}
-
-/* primary button on hero — accent bg, dark text */
-main .hero a.button.primary:any-link {
-  background: var(--accent-color);
-  border: 2px solid var(--accent-color);
-  color: var(--dark-color);
-}
-
-main .hero a.button.primary:any-link:hover {
-  filter: brightness(0.9);
-}
-
-/* secondary button on hero — white outline, dark shadow */
-main .hero a.button.secondary:any-link {
-  background: transparent;
-  border: 2px solid rgb(255 255 255 / 50%);
-  color: var(--background-color);
-}
-
-main .hero a.button.secondary:any-link:hover {
-  border-color: var(--background-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
 }
 
 @media (width < 768px) {
@@ -195,17 +149,12 @@ main .hero a.button.secondary:any-link:hover {
 
 @media (width >= 768px) {
   .hero {
-    min-height: 65vh;
+    min-height: 72vh;
     padding: var(--gap-3xl) var(--gap-xl);
   }
 
   .hero p:not(.tag-pill) {
     font-size: 20px;
-  }
-
-  .hero h1 {
-    font-size: var(--heading-font-size-xxl);
-    letter-spacing: -1.12px;
   }
 }
 
@@ -223,71 +172,76 @@ main .hero a.button.secondary:any-link:hover {
 
 /* breadcrumbs — reset eyebrow styles from base */
 .hero.article > div > p:first-child {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   letter-spacing: inherit;
   text-transform: none;
-  color: var(--text-on-dark);
+  color: var(--text-color-muted);
   margin-bottom: var(--gap-xl);
 }
 
 .hero.article a {
-  color: rgb(255 255 255 / 70%);
+  color: var(--text-color-muted);
   font-size: var(--body-font-size-s);
 }
 
-/* tag line — "Expedition · Americas · Hiking" (non-pill, text-only) */
+.hero.article a:hover {
+  color: var(--link-hover-color);
+}
+
+/* tag line — "Expedition · Americas · Hiking" (non-pill, text-only kicker) */
 .hero.article > div > p:nth-child(2) {
-  font-family: var(--heading-font-family);
-  font-size: var(--tag-font-size);
-  font-weight: 600;
-  letter-spacing: var(--tag-letter-spacing);
-  color: var(--accent-color);
+  font-family: var(--body-font-family);
+  font-size: var(--kicker-font-size);
+  font-weight: 700;
+  letter-spacing: var(--kicker-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kicker-color);
   margin-bottom: var(--gap-md);
 }
 
-/* em-wrapped tag pills — uses .tag-pill utility, adds hero article overrides */
-.hero.article .tag-pill {
+/* em-wrapped tag pills — chip style from .tag-pill utility */
+.hero.article em.tag-pill {
   font-style: normal;
   margin-right: var(--gap-sm);
   margin-bottom: var(--gap-md);
 }
 
 /* author avatar — paragraph right after h1 containing only an img */
-.hero.article > div > h1 + p > img {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgb(255 255 255 / 30%);
-}
-
-/* fallback: attribute-based avatar detection */
+.hero.article > div > h1 + p > img,
 .hero.article img[width="44"],
 .hero.article img[alt*="avatar"] {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgb(255 255 255 / 30%);
+  border: 2px solid var(--brand-orange);
 }
 
 /* author name */
 .hero.article > div > h1 + p + p {
   font-weight: 700;
-  color: var(--background-color);
+  color: var(--text-color);
   margin-top: var(--gap-sm);
 }
 
 /* author date/read time */
 .hero.article > div > h1 + p + p + p {
-  color: var(--text-on-dark-muted);
+  color: var(--text-color-muted);
   font-size: var(--body-font-size-s);
 }
 
 @media (width >= 768px) {
   .hero.article {
     min-height: min(55vh, 420px);
+  }
+
+  .hero.article h1 {
+    font-size: clamp(2.25rem, 4.4vw, 3.5rem);
   }
 }

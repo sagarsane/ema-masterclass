@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/expeditions.html",
+  "path": "expeditions",
+  "timestamp": "2026-09-24T21:11:49.953Z",
+  "title": "Expeditions — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "tabs-activity",
+    "editorial-index",
+    "editorial-index",
+    "cards-article"
+  ]
+}

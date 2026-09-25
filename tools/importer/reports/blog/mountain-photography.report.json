@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/blog/mountain-photography.html",
+  "path": "blog/mountain-photography",
+  "timestamp": "2026-09-24T21:12:18.425Z",
+  "title": "The Camera on Your Back — Rockstar Adventures",
+  "blocks": [
+    "hero-article",
+    "columns-pullquote",
+    "cards-article",
+    "gallery"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/about.html",
+  "path": "about",
+  "timestamp": "2026-09-24T21:11:34.009Z",
+  "title": "About — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "tabs-team",
+    "columns-about",
+    "cards-article",
+    "cards-feature"
+  ]
+}

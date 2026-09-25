@@ -17,7 +17,7 @@ export default function decorate(block) {
       if (i > 0) {
         const sep = document.createElement('span');
         sep.className = 'ticker-sep';
-        sep.textContent = '·';
+        sep.textContent = '★';
         container.append(sep);
       }
       const span = document.createElement('span');
@@ -27,7 +27,7 @@ export default function decorate(block) {
     // Trailing separator for seamless loop
     const sep = document.createElement('span');
     sep.className = 'ticker-sep';
-    sep.textContent = '·';
+    sep.textContent = '★';
     container.append(sep);
   }
 

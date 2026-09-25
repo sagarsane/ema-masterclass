@@ -6,10 +6,11 @@
 
 /* --- Local design tokens --- */
 .tabs-container {
-  --tabs-accent: var(--accent-color, rgb(232 101 26));
-  --tabs-text: var(--dark-color, rgb(15 26 20));
-  --tabs-muted: var(--text-color-muted, rgb(122 138 128));
-  --tabs-inactive: var(--border-color, rgb(200 194 184));
+  --tabs-accent: var(--gradient-brand, linear-gradient(135deg, #f97316, #c026d3));
+  --tabs-text: var(--text-color, #eef0f4);
+  --tabs-muted: var(--text-color-muted, #c5c8d2);
+  --tabs-inactive: var(--text-color-subtle, #9aa0b0);
+  --tabs-rule: var(--glass-border, rgb(255 255 255 / 12%));
 
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -26,7 +27,7 @@
   margin: 0 0 var(--gap-xs);
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-xl, 40px);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--tabs-text);
 }
 
@@ -37,7 +38,7 @@
   gap: 0;
   max-width: 100%;
   overflow-x: auto;
-  border-top: 2px solid var(--tabs-text);
+  border-bottom: 1px solid var(--tabs-rule);
   padding-top: var(--gap-xs);
   padding-bottom: 4px;
   margin-bottom: var(--gap-lg);
@@ -52,10 +53,10 @@
   background: none;
   font-family: var(--heading-font-family);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--tabs-inactive);
   cursor: pointer;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
   line-height: 1.1;
   white-space: nowrap;
   box-shadow: none;
@@ -67,15 +68,20 @@
   color: inherit;
 }
 
-/* Active tab: dark text + accent underline (CSS default until JS takes over) */
+/* Active tab: light text + gradient underline (CSS default until JS takes over) */
 .tabs-container .tabs-list button[aria-selected='true'] {
   color: var(--tabs-text);
-  box-shadow: inset 0 -4px 0 var(--tabs-accent);
+  background: var(--tabs-accent) no-repeat left bottom / 100% 4px;
 }
 
 /* Once a tab is clicked, JS indicator handles the underline */
 .tabs-container .tabs-list.tabs-animated button[aria-selected='true'] {
-  box-shadow: none;
+  background: none;
+}
+
+.tabs-container .tabs-list button:focus-visible {
+  outline-offset: -2px;
+  border-radius: 6px;
 }
 
 .tabs-container .tabs-list button:hover {
@@ -91,7 +97,7 @@
   position: absolute;
   bottom: 0;
   height: 4px;
-  background-color: var(--tabs-accent);
+  background: var(--tabs-accent);
   border-radius: 2px;
   pointer-events: none;
   opacity: 0;

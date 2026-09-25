@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/faq.html",
+  "path": "faq",
+  "timestamp": "2026-09-24T21:11:39.522Z",
+  "title": "FAQ — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "faq-list",
+    "faq-list",
+    "faq-list",
+    "faq-list",
+    "faq-list",
+    "cards-article"
+  ]
+}

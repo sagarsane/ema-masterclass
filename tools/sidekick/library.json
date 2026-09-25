@@ -21,12 +21,12 @@
   },
   "sections": {
     "data": [
-      { "name": "Dark Section", "path": "/tools/sidekick/sections/dark", "description": "Dark green background with white text and amber accents" },
-      { "name": "Accent Section", "path": "/tools/sidekick/sections/accent", "description": "Orange background with dark text" },
-      { "name": "Secondary Section", "path": "/tools/sidekick/sections/secondary", "description": "Warm beige background" },
+      { "name": "Dark Section", "path": "/tools/sidekick/sections/dark", "description": "Deep violet surface with a soft brand glow and light text" },
+      { "name": "Accent Section", "path": "/tools/sidekick/sections/accent", "description": "Orange-to-violet brand gradient band with white text" },
+      { "name": "Secondary Section", "path": "/tools/sidekick/sections/secondary", "description": "Subtle lifted glass band on the dark page background" },
       { "name": "Dark + Narrow", "path": "/tools/sidekick/sections/dark-narrow", "description": "Dark section with narrow content width (768px)" },
-      { "name": "Accent + Center", "path": "/tools/sidekick/sections/accent-center", "description": "Orange centered CTA section with buttons" },
-      { "name": "Dark + Center", "path": "/tools/sidekick/sections/dark-center", "description": "Dark centered CTA section with buttons" }
+      { "name": "Accent + Center", "path": "/tools/sidekick/sections/accent-center", "description": "Brand gradient centered CTA section with buttons" },
+      { "name": "Dark + Center", "path": "/tools/sidekick/sections/dark-center", "description": "Deep violet centered CTA section with buttons" }
     ]
   }
 }

@@ -18,8 +18,9 @@ import cardsArticleParser from './parsers/cards-article.js';
 import cardsFeatureParser from './parsers/cards-feature.js';
 
 // TRANSFORMER IMPORTS
-import wkndCleanupTransformer from './transformers/wknd-cleanup.js';
-import wkndSectionsTransformer from './transformers/wknd-sections.js';
+import cleanupTransformer from './transformers/cleanup.js';
+import sectionsTransformer from './transformers/sections.js';
+import brandTransformer from './transformers/brand.js';
 
 /**
  * BLOCK_REGISTRY — content-driven block detection.
@@ -102,7 +103,8 @@ function findBlocksOnPage(document) {
  * Execute all page transformers for a specific hook
  */
 function executeTransformers(hookName, element, payload) {
-  const transformers = [wkndCleanupTransformer, wkndSectionsTransformer];
+  // brand runs last so it rewrites text produced by parsers and the other transformers
+  const transformers = [cleanupTransformer, sectionsTransformer, brandTransformer];
 
   transformers.forEach((transformerFn) => {
     try {
@@ -135,7 +137,7 @@ export default {
       }
     });
 
-    // 3. Execute afterTransform transformers
+    // 3. Execute afterTransform transformers (image URL resolution + Rockstar rebrand)
     executeTransformers('afterTransform', main, payload);
 
     // 4. Apply WebImporter built-in rules
