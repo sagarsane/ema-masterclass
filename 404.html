@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta
@@ -7,13 +7,13 @@
     content="script-src 'nonce-aem' 'strict-dynamic' 'unsafe-inline' http: https:; base-uri 'self'; object-src 'none';"
     move-to-http-header="true"
   >
-  <title>Page not found — WKND Adventures</title>
+  <title>Page not found — Rockstar Adventures</title>
   <script nonce="aem" type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Page not found — WKND Adventures">
+  <meta property="og:title" content="Page not found — Rockstar Adventures">
   <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
   <script nonce="aem" type="module">
     window.addEventListener('load', () => {
@@ -53,18 +53,20 @@
     .error-code {
       font-family: var(--heading-font-family);
       font-size: clamp(80px, 20vw, 200px);
-      font-weight: 700;
+      font-weight: 900;
       line-height: 1;
       letter-spacing: -0.04em;
-      color: var(--accent-color);
+      background: var(--brand-gradient);
+      background-clip: text;
+      color: transparent;
       margin: 0 0 16px;
     }
 
     .error-message {
       font-family: var(--heading-font-family);
       font-size: var(--heading-font-size-l);
-      font-weight: 700;
-      color: var(--text-color);
+      font-weight: 800;
+      color: var(--heading-color);
       margin: 0 0 12px;
     }
 

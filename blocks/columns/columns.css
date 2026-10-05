@@ -58,6 +58,7 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow);
   display: block;
 }
 
@@ -88,18 +89,19 @@
   gap: var(--gap-lg);
 }
 
-/* each cell = promo card */
+/* each cell = promo card (glass) */
 .columns.columns-promo > div > div {
   padding: var(--gap-lg);
-  background-color: var(--background-color);
+  background-color: var(--surface-color);
   border: 1px solid var(--border-color-light);
   border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow);
   transition: var(--card-hover-transition);
 }
 
-.columns.columns-promo > div > div:hover {
-  background-color: var(--cream-color);
-  border-color: var(--border-color);
+.columns.columns-promo > div > div:hover,
+.columns.columns-promo > div > div:focus-within {
+  border-color: rgb(249 115 22 / 45%);
   box-shadow: var(--card-hover-shadow);
 }
 
@@ -107,11 +109,11 @@
 .columns.columns-promo em {
   display: inline-block;
   font-style: normal;
-  font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 1.4px;
-  color: var(--accent-color);
+  font-size: var(--tag-font-size);
+  font-weight: 800;
+  letter-spacing: var(--tag-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kicker-color);
 }
 
 .columns.columns-promo h3 {
@@ -124,35 +126,32 @@
   line-height: 1.6;
 }
 
-/* ghost button link */
+/* ghost pill button link */
 .columns.columns-promo a:any-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: var(--button-font-family);
   font-size: var(--button-font-size);
   font-weight: var(--button-font-weight);
   letter-spacing: var(--button-letter-spacing);
   text-decoration: none;
   padding: var(--button-padding);
-  background-color: transparent;
-  color: var(--dark-color);
-  border: 2px solid var(--dark-color);
+  background-color: rgb(255 255 255 / 4%);
+  color: var(--heading-color);
+  border: 1px solid rgb(255 255 255 / 35%);
   border-radius: var(--button-border-radius);
-  box-shadow: 3px 3px 0 var(--accent-color);
   transition: var(--button-transition);
 }
 
 .columns.columns-promo a:any-link:hover {
-  background-color: var(--dark-color);
-  color: var(--background-color);
-  transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--accent-color);
+  background: var(--brand-gradient-strong);
+  border-color: rgb(255 255 255 / 18%);
+  color: var(--on-brand-color);
+  transform: translateY(-1px);
 }
 
 .columns.columns-promo a:any-link:active {
-  background-color: var(--dark-color);
-  color: var(--background-color);
   transform: translateY(0);
-  box-shadow: 0 0 0 var(--accent-color);
 }
 
 .columns.columns-promo img {
@@ -182,31 +181,74 @@
 }
 
 .columns.columns-pullquote > div > div:first-child li {
-  padding: var(--gap-xs) 0;
+  padding: var(--gap-xs) 0 var(--gap-xs) var(--gap-lg);
   border-bottom: 1px solid var(--border-color-light);
   font-weight: 500;
+  position: relative;
 }
 
-/* pull quote column */
+/* gradient bullet dot */
+.columns.columns-pullquote > div > div:first-child li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+}
+
+/* pull quote column — card with opening quote mark */
 .columns.columns-pullquote > div > div:last-child {
-  background-color: var(--dark-color);
+  position: relative;
+  background:
+    radial-gradient(500px 260px at 100% 0%, rgb(192 38 211 / 22%), transparent 70%),
+    var(--surface-color);
+  border: 1px solid var(--glass-border);
   border-radius: var(--card-border-radius);
-  padding: var(--gap-xl);
-  color: var(--background-color);
+  box-shadow: var(--shadow);
+  padding: var(--gap-2xl) var(--gap-xl) var(--gap-xl);
+  color: var(--text-color);
+}
+
+.columns.columns-pullquote > div > div:last-child::before {
+  content: '\201C' / '';
+  position: absolute;
+  top: -6px;
+  left: var(--gap-xl);
+  font-family: var(--heading-font-family);
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  background: var(--brand-gradient);
+  background-clip: text;
+  color: transparent;
+}
+
+.columns.columns-pullquote > div > div:last-child blockquote {
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+.columns.columns-pullquote > div > div:last-child blockquote::before {
+  display: none;
 }
 
 .columns.columns-pullquote > div > div:last-child blockquote,
 .columns.columns-pullquote > div > div:last-child p {
-  color: var(--background-color);
+  color: var(--heading-color);
   font-size: var(--heading-font-size-m);
   font-style: italic;
-  line-height: 1.4;
+  line-height: 1.45;
   margin: 0 0 var(--gap-md);
 }
 
 .columns.columns-pullquote > div > div:last-child em {
   font-style: normal;
-  color: var(--text-color-muted);
+  color: var(--kicker-color);
   font-size: var(--body-font-size-s);
 }
 
@@ -214,7 +256,7 @@
   .columns.columns-pullquote > div {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: var(--gap-lg);
+    gap: var(--gap-xl);
     align-items: start;
   }
 }

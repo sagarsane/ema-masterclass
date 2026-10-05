@@ -18,8 +18,9 @@ import cardsArticleParser from './parsers/cards-article.js';
 import cardsFeatureParser from './parsers/cards-feature.js';
 
 // TRANSFORMER IMPORTS
-import wkndCleanupTransformer from './transformers/wknd-cleanup.js';
-import wkndSectionsTransformer from './transformers/wknd-sections.js';
+import cleanupTransformer from './transformers/cleanup.js';
+import sectionsTransformer from './transformers/sections.js';
+import rockstarBrandTransformer from './transformers/rockstar-brand.js';
 
 /**
  * BLOCK_REGISTRY — content-driven block detection.
@@ -102,7 +103,7 @@ function findBlocksOnPage(document) {
  * Execute all page transformers for a specific hook
  */
 function executeTransformers(hookName, element, payload) {
-  const transformers = [wkndCleanupTransformer, wkndSectionsTransformer];
+  const transformers = [cleanupTransformer, sectionsTransformer, rockstarBrandTransformer];
 
   transformers.forEach((transformerFn) => {
     try {
@@ -121,7 +122,7 @@ export default {
 
     const main = document.body;
 
-    // 1. Execute beforeTransform transformers (cleanup + section breaks)
+    // 1. Execute beforeTransform transformers (cleanup + section breaks + Rockstar rebrand)
     executeTransformers('beforeTransform', main, payload);
 
     // 2. Find and parse all blocks on page (content-driven detection)

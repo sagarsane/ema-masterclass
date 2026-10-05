@@ -1,27 +1,50 @@
 /* stylelint-disable no-descending-specificity -- consolidated variant file */
 
 /*
- * WKND Adventures - Edge Delivery Services
- * Design system migrated from https://wknd-adventures.com/
+ * Rockstar Adventures - Edge Delivery Services
+ * Design system inspired by the AEM Rockstar Masterclass brand
+ * (https://rockstar.adobeevents.com/en/masterclass): dark "stage" surfaces,
+ * orange → magenta → purple light, Poppins display type, Roboto body.
  */
 
 :root {
-  /* colors */
-  --background-color: #fff;
-  --text-color: #0f1a14;
-  --text-color-muted: #7a8a80;
-  --text-color-subtle: #3d4f45;
-  --accent-color: #e8651a;
-  --light-color: #f0ece4;
-  --dark-color: #0f1a14;
-  --cream-color: #f5f0e8;
-  --forest-color: #1a3a2e;
-  --border-color: #c8c2b8;
-  --border-color-light: #ddd8cf;
+  color-scheme: dark;
+
+  /* surfaces */
+  --background-color: #0b0b10; /* deep stage black */
+  --surface-color: #10121a; /* card */
+  --surface-raised-color: #171429; /* indigo */
+  --nav-background-color: #0a1125; /* navy (header, footer, dark sections) */
+
+  /* text */
+  --text-color: #eef0f4;
+  --heading-color: #fff;
+  --text-color-muted: #c5c8d2;
+  --text-color-subtle: #9ba1b5;
+  --on-brand-color: #fff;
+  --kicker-color: #ffd7b0; /* peach eyebrow */
+
+  /* brand */
+  --accent-color: #f97316; /* orange */
+  --accent-magenta: #c026d3;
+  --accent-purple: #7c3aed;
+
+  /* decorative gradient — rules, dots, glows (not behind small text) */
+  --brand-gradient: linear-gradient(135deg, var(--accent-color), var(--accent-magenta));
+
+  /* text-bearing gradient — white text stays >= 5:1 at every stop */
+  --brand-gradient-strong: linear-gradient(135deg, #c2410c 0%, #a21caf 60%, #7c3aed 100%);
+
+  /* borders + glass */
+  --border-color: rgb(255 255 255 / 18%);
+  --border-color-light: rgb(255 255 255 / 10%);
+  --glass-bg: rgb(255 255 255 / 6%);
+  --glass-bg-hover: rgb(255 255 255 / 10%);
+  --glass-border: rgb(255 255 255 / 12%);
 
   /* fonts */
-  --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
-  --heading-font-family: syncopate, syncopate-fallback, sans-serif;
+  --body-font-family: roboto, roboto-fallback, sans-serif;
+  --heading-font-family: poppins, poppins-fallback, sans-serif;
 
   /* body sizes (mobile-first) */
   --body-font-size-m: 16px;
@@ -29,12 +52,12 @@
   --body-font-size-xs: 12px;
 
   /* heading sizes (mobile-first) */
-  --heading-font-size-xxl: 32px;
-  --heading-font-size-xl: 28px;
-  --heading-font-size-l: 22px;
-  --heading-font-size-m: 18px;
-  --heading-font-size-s: 16px;
-  --heading-font-size-xs: 14px;
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 30px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
 
   /* spacing */
   --section-padding: 48px 0;
@@ -53,68 +76,62 @@
   --nav-height: 64px;
 
   /* buttons */
-  --button-font-family: syncopate, syncopate-fallback, sans-serif;
-  --button-font-size: 14px;
+  --button-font-family: var(--body-font-family);
+  --button-font-size: 16px;
   --button-font-weight: 700;
-  --button-letter-spacing: 0.98px;
-  --button-border-radius: 9999px;
-  --button-padding: 13px 32px 11px;
-  --button-transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s,
-    color 0.15s, border-color 0.15s;
-  --btn-shadow: var(--accent-color);
+  --button-letter-spacing: 0.2px;
+  --button-border-radius: 999px;
+  --button-padding: 10px 24px;
+  --button-transition: transform 0.16s ease, filter 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
   /* links */
-  --link-color: #e8651a;
-  --link-hover-color: #c9530e;
+  --link-color: #fdba74;
+  --link-hover-color: var(--kicker-color);
+  --focus-color: var(--kicker-color);
 
   /* transitions */
   --transition-fast: 0.15s;
   --transition-normal: 0.3s ease;
 
-  /* border radii */
-  --border-radius-sm: 8px;
-  --card-border-radius: 20px;
+  /* border radii + elevation */
+  --border-radius-sm: 10px;
+  --card-border-radius: 22px;
+  --shadow: 0 10px 30px rgb(0 0 0 / 45%);
+  --glow-shadow: 0 14px 40px rgb(124 58 237 / 28%);
 
   /* card shared patterns */
-  --card-hover-shadow: 0 4px 20px rgb(0 0 0 / 8%);
-  --card-hover-transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  --card-hover-shadow: var(--shadow), var(--glow-shadow);
+  --card-hover-transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
 
-  /* tag pill shared patterns — asymmetric padding optically centers uppercase text */
-  --tag-padding: 5px 8px 3px;
-  --tag-font-size: 10.4px;
-  --tag-letter-spacing: 0.52px;
+  /* tag pill shared patterns */
+  --tag-padding: 5px 12px;
+  --tag-font-size: 12px;
+  --tag-letter-spacing: 0.12em;
 
-  /* text link (Syncopate underlined link pattern) */
-  --text-link-letter-spacing: 0.84px;
-  --text-link-underline-offset: 3px;
+  /* text link pattern */
+  --text-link-letter-spacing: 0.2px;
+  --text-link-underline-offset: 4px;
 
   /* brand */
-  --logo-icon-size: 32px;
-  --brand-letter-spacing: 0.6px;
-
-  /* footer */
-  --footer-link-color: #999;
-
-  /* dark section / overlay text */
-  --text-on-dark: rgb(255 255 255 / 85%);
-  --text-on-dark-muted: rgb(255 255 255 / 55%);
-
-  /* glass card (dark section) */
-  --glass-bg: rgb(255 255 255 / 6%);
-  --glass-border: rgb(255 255 255 / 12%);
+  --logo-icon-size: 36px;
+  --brand-letter-spacing: 0.02em;
 }
 
 /* fallback fonts */
 @font-face {
-  font-family: instrument-sans-fallback;
-  size-adjust: 91%;
+  font-family: roboto-fallback;
+  size-adjust: 100.06%;
+  ascent-override: 95%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: syncopate-fallback;
-  size-adjust: 138%;
-  src: local('Arial Black'), local('Arial');
+  font-family: poppins-fallback;
+  size-adjust: 112.5%;
+  ascent-override: 105%;
+  src: local('Arial');
 }
 
 /* desktop — content reflow breakpoint */
@@ -123,15 +140,14 @@
     --body-font-size-m: 18px;
     --body-font-size-s: 16px;
     --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 56px;
-    --heading-font-size-xl: 40px;
+    --heading-font-size-xxl: 60px;
+    --heading-font-size-xl: 44px;
     --heading-font-size-l: 32px;
     --heading-font-size-m: 24px;
     --heading-font-size-s: 20px;
-    --heading-font-size-xs: 14px;
-    --section-padding: 64px 0;
-    --container-padding: 0 24px;
-    --nav-height: 75px;
+    --heading-font-size-xs: 16px;
+    --section-padding: 72px 0;
+    --nav-height: 72px;
   }
 }
 
@@ -141,10 +157,17 @@ body {
   display: none;
   margin: 0;
   background-color: var(--background-color);
+
+  /* stage lighting — orange key light top-right, purple fill top-left */
+  background-image:
+    radial-gradient(1200px 600px at 85% -5%, rgb(238 90 36 / 35%) 0%, transparent 60%),
+    radial-gradient(900px 600px at 5% 5%, rgb(109 40 217 / 40%) 0%, transparent 60%),
+    linear-gradient(180deg, var(--surface-raised-color), var(--background-color) 1400px);
+  background-repeat: no-repeat;
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 body.appear {
@@ -180,20 +203,25 @@ h6 {
   margin-bottom: var(--gap-xs);
   font-family: var(--heading-font-family);
   font-weight: 700;
+  line-height: 1.15;
+  color: var(--heading-color);
+  scroll-margin: calc(var(--nav-height) + 24px);
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 900;
   line-height: 1.1;
-  scroll-margin: 40px;
-  letter-spacing: -0.02em;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
+h2 {
+  font-size: var(--heading-font-size-xl);
+  font-weight: 800;
+}
+
 h3 { font-size: var(--heading-font-size-l); }
-
-h4 {
-  font-size: var(--heading-font-size-m);
-  letter-spacing: 0;
-}
-
+h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 
 h6 {
@@ -213,7 +241,15 @@ blockquote {
 
 p {
   color: var(--text-color);
-  line-height: 1.7;
+  line-height: 1.6;
+}
+
+strong {
+  color: var(--heading-color);
+}
+
+li::marker {
+  color: var(--accent-color);
 }
 
 /* --- VERTICAL RHYTHM: Default content flow --- */
@@ -259,29 +295,47 @@ pre {
 
 pre {
   padding: var(--gap-md);
+  border: 1px solid var(--glass-border);
   border-radius: var(--border-radius-sm);
-  background-color: var(--light-color);
+  background-color: var(--surface-color);
   overflow-x: auto;
   white-space: pre;
 }
 
-/* blockquote — amber left border, italic */
+/* blockquote — gradient rule, italic */
 blockquote {
-  border-left: 4px solid var(--accent-color);
+  position: relative;
   margin: var(--gap-lg) 0;
   padding: var(--gap-md) var(--gap-lg);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  background: var(--glass-bg);
   font-style: italic;
   font-size: 20px;
   line-height: 1.6;
 }
 
+blockquote::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--brand-gradient);
+}
+
 blockquote p {
   margin-bottom: var(--gap-sm);
-  color: var(--text-color-subtle);
+  color: var(--text-color);
 }
 
 blockquote p:last-child {
   margin-bottom: 0;
+}
+
+hr {
+  height: 1px;
+  margin: var(--gap-xl) 0;
+  border: 0;
+  background: var(--border-color-light);
 }
 
 main > div {
@@ -314,16 +368,19 @@ main img {
   width: 100%;
 }
 
-/* --- TAG PILL: shared eyebrow / category label --- */
+/* --- TAG PILL: shared eyebrow / category label (glass badge) --- */
 
 .tag-pill {
   display: inline-block;
-  font-family: var(--heading-font-family);
+  font-family: var(--body-font-family);
   font-size: var(--tag-font-size);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.5;
   letter-spacing: var(--tag-letter-spacing);
-  background-color: var(--accent-color);
-  color: var(--background-color);
+  text-transform: uppercase;
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--kicker-color);
   padding: var(--tag-padding);
   border-radius: var(--button-border-radius);
 }
@@ -332,20 +389,22 @@ main img {
 
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
   overflow-wrap: break-word;
   transition: color var(--transition-fast);
 }
 
 a:hover {
   color: var(--link-hover-color);
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
-/* focus ring — accessibility */
+/* focus ring — accessibility (peach reads on every dark surface) */
 *:focus-visible {
-  outline: 2px solid var(--dark-color);
-  outline-offset: 2px;
+  outline: 2px solid var(--focus-color);
+  outline-offset: 3px;
 }
 
 /* --- BUTTON SYSTEM --- */
@@ -370,63 +429,73 @@ a.button:any-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.6rem;
   max-width: 100%;
   margin: 0;
-  border: 2px solid transparent;
+  border: 1px solid var(--border-color);
   border-radius: var(--button-border-radius);
   padding: var(--button-padding);
   font-family: var(--button-font-family);
   font-size: var(--button-font-size);
   font-weight: var(--button-font-weight);
   letter-spacing: var(--button-letter-spacing);
-  line-height: 1.25;
+  line-height: 1.5;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--accent-color));
+  box-shadow: var(--shadow);
   transition: var(--button-transition);
 }
 
 a.button:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--accent-color));
+  transform: translateY(-1px);
+  filter: brightness(1.08);
   text-decoration: none;
 }
 
 a.button:active {
-  transform: translate(0, 0);
-  box-shadow: 0 0 0 0 var(--btn-shadow, var(--accent-color));
+  transform: translateY(0);
+  filter: none;
 }
 
-
-/* Primary: dark bg, white text */
+/* Primary: brand gradient pill, white text */
 a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  border-color: rgb(255 255 255 / 18%);
+  background: var(--brand-gradient-strong);
+  color: var(--on-brand-color);
 }
 
-/* Secondary/Ghost: transparent bg, border matches context */
+a.button.primary:hover {
+  color: var(--on-brand-color);
+  box-shadow: var(--shadow), var(--glow-shadow);
+}
+
+/* Secondary/Ghost: transparent glass, white text */
 a.button.secondary {
-  border-color: var(--dark-color);
-  background-color: transparent;
-  color: var(--dark-color);
+  border-color: rgb(255 255 255 / 35%);
+  background-color: rgb(255 255 255 / 4%);
+  color: var(--heading-color);
+  backdrop-filter: blur(6px);
 }
 
 a.button.secondary:hover {
-  background-color: var(--dark-color);
+  border-color: var(--heading-color);
+  background-color: var(--glass-bg-hover);
+  color: var(--heading-color);
+}
+
+/* Accent: high-impact peach pill, dark text */
+a.button.accent {
+  border-color: var(--kicker-color);
+  background-color: var(--kicker-color);
   color: var(--background-color);
 }
 
-/* Accent: orange bg, dark text (hero) */
-a.button.accent {
-  border-color: var(--accent-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+a.button.accent:hover {
+  color: var(--background-color);
 }
-
 
 /* button groups — stack on mobile */
 @media (width < 768px) {
@@ -472,68 +541,36 @@ main > .section:not(:has(> *)) {
 
 /* --- SECTION METADATA STYLES --- */
 
-/* Highlight / Light: beige bg */
-main .section.light,
-main .section.highlight {
-  background-color: var(--light-color);
+/* Highlight / Light / Secondary: raised indigo stage */
+main > .section.light,
+main > .section.highlight,
+main > .section.secondary {
+  background:
+    radial-gradient(800px 400px at 100% 0%, rgb(124 58 237 / 18%), transparent 70%),
+    var(--surface-raised-color);
+  border-block: 1px solid var(--border-color-light);
 }
 
-/* Dark: dark bg, white text */
+/* Dark: navy stage with a low purple glow */
 main > .section.dark {
-  background-color: var(--dark-color);
-  color: var(--background-color);
-
-  --btn-shadow: var(--accent-color);
-}
-
-main > .section.dark h1,
-main > .section.dark h2,
-main > .section.dark h3,
-main > .section.dark h4,
-main > .section.dark h5,
-main > .section.dark h6 {
-  color: var(--background-color);
+  background:
+    radial-gradient(900px 420px at 0% 100%, rgb(192 38 211 / 16%), transparent 70%),
+    var(--nav-background-color);
+  border-block: 1px solid var(--border-color-light);
 }
 
 main > .section.dark p:not(.tag-pill) {
-  color: var(--text-on-dark);
+  color: var(--text-color-muted);
 }
 
-main > .section.dark a:any-link:not(.button) {
-  color: var(--accent-color);
+main > .section.dark strong {
+  color: var(--heading-color);
 }
 
-/* dark section: primary button inverts to white fill + amber shadow */
-main > .section.dark a.button.primary {
-  border-color: var(--background-color);
-  background-color: var(--background-color);
-  color: var(--dark-color);
-}
-
-/* dark section: ghost button uses white outline */
-main > .section.dark a.button.secondary {
-  border-color: rgb(255 255 255 / 50%);
-  background-color: transparent;
-  color: var(--background-color);
-}
-
-main > .section.dark a.button.secondary:hover {
-  background-color: var(--background-color);
-  border-color: var(--background-color);
-  color: var(--dark-color);
-}
-
-/* dark section: focus ring uses white */
-main > .section.dark *:focus-visible {
-  outline-color: var(--background-color);
-}
-
-/* Accent: orange bg, dark text */
+/* Accent: full brand gradient, white text */
 main > .section.accent {
-  background-color: var(--accent-color);
-  color: var(--dark-color);
-
-  --btn-shadow: var(--background-color);
+  background: var(--brand-gradient-strong);
+  color: var(--on-brand-color);
 }
 
 main > .section.accent h1,
@@ -541,34 +578,40 @@ main > .section.accent h2,
 main > .section.accent h3,
 main > .section.accent h4,
 main > .section.accent h5,
-main > .section.accent h6 {
-  color: var(--dark-color);
+main > .section.accent h6,
+main > .section.accent p {
+  color: var(--on-brand-color);
 }
 
-main > .section.accent p {
-  color: var(--dark-color);
+main > .section.accent a:any-link:not(.button) {
+  color: var(--on-brand-color);
 }
 
 main > .section.accent > div > p:not(.tag-pill) {
   font-size: 20px;
 }
 
-/* accent section: primary button uses black fill + white shadow */
+/* accent section: primary button inverts to white fill */
 main > .section.accent a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  border-color: var(--heading-color);
+  background: var(--heading-color);
+  color: var(--accent-purple);
 }
 
 main > .section.accent a.button.secondary {
-  border-color: var(--dark-color);
-  color: var(--dark-color);
+  border-color: rgb(255 255 255 / 70%);
   background-color: transparent;
+  color: var(--on-brand-color);
 }
 
-/* Secondary: light bg (kept for backward compatibility) */
-main > .section.secondary {
-  background-color: var(--light-color);
+main > .section.accent .tag-pill {
+  background-color: rgb(0 0 0 / 22%);
+  border-color: rgb(255 255 255 / 35%);
+  color: var(--on-brand-color);
+}
+
+main > .section.accent *:focus-visible {
+  outline-color: var(--heading-color);
 }
 
 /* Narrow: constrains content to narrow max-width */
@@ -590,11 +633,6 @@ main > .section.center .button-wrapper {
   margin: 4px 8px;
 }
 
-/* Accent section: tag pill uses dark bg instead of accent */
-main .section.accent .tag-pill {
-  background-color: var(--dark-color);
-}
-
 /* Body paragraphs in dark/narrow sections */
 main .section.dark.narrow p:not(.tag-pill) {
   font-size: var(--body-font-size-m);
@@ -605,6 +643,11 @@ main .section.dark.narrow h2 {
   margin-bottom: var(--gap-lg);
 }
 
+/* Eyebrow pill above a section heading gets breathing room */
+main > .section > div > p.tag-pill:first-child {
+  margin-bottom: var(--gap-md);
+}
+
 /* --- ARTICLE BODY --- */
 
 /* article body — narrow reading column after hero (article) */
@@ -612,12 +655,21 @@ main .section.dark.narrow h2 {
   max-width: var(--container-narrow-max-width);
 }
 
-/* image captions in article body */
-.hero-container:has(.article) + .section > div > p:has(> img) + p {
-  font-size: var(--body-font-size-s);
+.hero-container:has(.article) + .section p {
   color: var(--text-color-muted);
+}
+
+/* image captions in article body */
+.hero-container:has(.article) + .section > div > p:has(> img) + p,
+.hero-container:has(.article) + .section > div > p:has(> picture) + p {
+  font-size: var(--body-font-size-s);
+  color: var(--text-color-subtle);
   font-style: italic;
   margin-top: -8px;
+}
+
+.hero-container:has(.article) + .section img {
+  border-radius: var(--border-radius-sm);
 }
 
 /* --- BUTTON GROUP --- */
@@ -628,7 +680,6 @@ main .section.dark.narrow h2 {
   gap: var(--gap-xs);
   margin: var(--gap-xs) 0;
 }
-
 
 main .default-content-wrapper .button-group p.button-wrapper {
   margin: 0;

@@ -1,15 +1,26 @@
 /* stylelint-disable no-descending-specificity */
 
 /* ----------------------------------------------------------------
-   Footer — dark inverse with accent top border
+   Footer — navy stage with brand-gradient top rule
    ---------------------------------------------------------------- */
 footer {
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  position: relative;
+  background:
+    radial-gradient(900px 360px at 100% 0%, rgb(238 90 36 / 14%), transparent 70%),
+    radial-gradient(900px 360px at 0% 100%, rgb(109 40 217 / 18%), transparent 70%),
+    var(--nav-background-color);
+  color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
-  border-top: 4px solid var(--accent-color);
   padding: var(--gap-3xl) 0;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-magenta), var(--accent-purple));
 }
 
 footer .footer > div {
@@ -24,12 +35,13 @@ footer p {
 }
 
 footer a:any-link {
-  color: var(--footer-link-color);
+  color: var(--text-color-muted);
   text-decoration: none;
 }
 
 footer a:hover {
-  color: var(--background-color);
+  color: var(--kicker-color);
+  text-decoration: underline;
 }
 
 /* Reset section styling inside footer (boilerplate fragment structure) */
@@ -55,13 +67,15 @@ footer .footer-top {
   margin-bottom: var(--gap-2xl);
 }
 
-/* Column headings */
-footer h4 {
-  font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  color: var(--background-color);
+/* Column headings (authored h4, promoted to h2 by footer.js) */
+footer h4,
+footer .footer-heading {
+  font-family: var(--body-font-family);
+  font-size: var(--tag-font-size);
+  font-weight: 800;
+  letter-spacing: var(--tag-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kicker-color);
   margin: 0 0 var(--gap-md);
 }
 
@@ -80,7 +94,7 @@ footer li a {
   display: block;
   padding: var(--gap-sm) 0;
   font-size: var(--body-font-size-s);
-  color: var(--footer-link-color);
+  color: var(--text-color-muted);
   transition: color 0.15s ease;
 }
 
@@ -90,45 +104,60 @@ footer li a {
 footer .footer-brand-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--gap-sm);
-  color: var(--background-color);
+  gap: 10px;
+  color: var(--heading-color);
   margin-bottom: var(--gap-md);
 }
 
 footer .footer-brand-link:hover {
-  color: var(--background-color);
+  color: var(--heading-color);
+  text-decoration: none;
 }
 
+/* gradient shield badge with white bolt (matches header) */
 footer .nav-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   width: var(--logo-icon-size);
   height: var(--logo-icon-size);
+  padding-bottom: 4px;
   flex-shrink: 0;
+  background: var(--brand-gradient);
+  clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 100%, 0 68%);
+  color: var(--heading-color);
 }
 
 footer .nav-logo-icon svg {
   display: block;
-  color: var(--background-color);
-  fill: var(--background-color);
-}
-
-footer .nav-logo-icon img {
-  filter: brightness(0) invert(1);
+  width: 70%;
+  height: 70%;
 }
 
 footer .nav-logo-text {
   font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-xs);
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
   letter-spacing: var(--brand-letter-spacing);
-  line-height: 1.2;
-  color: var(--background-color);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--heading-color);
+}
+
+footer .nav-logo-text span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--kicker-color);
 }
 
 /* Tagline below brand */
 footer .footer-col-brand p:last-child,
 footer .footer-col:first-child p:last-child {
   font-size: var(--body-font-size-s);
-  color: var(--footer-link-color);
+  color: var(--text-color-muted);
   line-height: 1.6;
 }
 
@@ -148,13 +177,13 @@ footer .footer-bottom .default-content-wrapper {
   justify-content: space-between;
   align-items: center;
   gap: var(--gap-md);
-  border-top: 1px solid var(--text-color-subtle);
+  border-top: 1px solid var(--border-color-light);
   padding-top: var(--gap-xl);
 }
 
 footer .footer-bottom p {
   font-size: var(--body-font-size-s);
-  color: var(--footer-link-color);
+  color: var(--text-color-subtle);
 }
 
 

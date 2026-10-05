@@ -1,0 +1,9 @@
+{
+  "sites": {
+    "ema-masterclass": {
+      "previewOrg": "sagarsane",
+      "previewSite": "ema-masterclass",
+      "contentHostUrl": "https://content.da.live/sagarsane/ema-masterclass/"
+    }
+  }
+}

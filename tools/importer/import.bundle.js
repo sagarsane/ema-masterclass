@@ -1,3 +1,4 @@
+/* eslint-disable */
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -648,7 +649,7 @@ var CustomImportScript = (() => {
     element.replaceWith(block);
   }
 
-  // tools/importer/transformers/wknd-cleanup.js
+  // tools/importer/transformers/cleanup.js
   var TransformHook = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
   function transform(hookName, element, payload) {
     if (hookName === TransformHook.beforeTransform) {
@@ -716,6 +717,21 @@ var CustomImportScript = (() => {
     if (hookName === TransformHook.afterTransform) {
       const sourceUrl = payload.params && payload.params.originalURL;
       if (sourceUrl) {
+        const { host } = new URL(sourceUrl);
+        element.querySelectorAll("a[href]").forEach((a) => {
+          const href = a.getAttribute("href");
+          if (/^(mailto:|tel:|#|javascript:)/i.test(href)) return;
+          try {
+            const target = new URL(href, sourceUrl);
+            if (target.host !== host && !/(^|\.)wknd-?adventures\.com$/i.test(target.host)) return;
+            let path = target.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+            if (path.length > 1) path = path.replace(/\/$/, "");
+            a.setAttribute("href", `${path}${target.search}${target.hash}`);
+          } catch (e) {
+          }
+        });
+      }
+      if (sourceUrl) {
         element.querySelectorAll("img").forEach((img) => {
           const src = img.getAttribute("src");
           if (src && !src.startsWith("http") && !src.startsWith("data:") && !src.startsWith("blob:")) {
@@ -729,7 +745,7 @@ var CustomImportScript = (() => {
     }
   }
 
-  // tools/importer/transformers/wknd-sections.js
+  // tools/importer/transformers/sections.js
   var STYLE_MAP = {
     "inverse-section": "dark",
     "secondary-section": "secondary",
@@ -782,6 +798,55 @@ var CustomImportScript = (() => {
         sectionEl.before(hr);
       }
     }
+  }
+
+  // tools/importer/transformers/rockstar-brand.js
+  var TransformHook2 = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
+  var BRAND_RULES = [
+    [/WKND\s+Adventures/g, "Rockstar Adventures"],
+    [/\bWKND\b/g, "Rockstar"],
+    [/wknd-?adventures\.com/gi, "rockstar-adventures.com"]
+  ];
+  var TEXT_ATTRS = ["alt", "title", "aria-label"];
+  var TEXT_META = 'meta[name="description"], meta[property="og:title"], meta[property="og:description"], meta[name="twitter:title"], meta[name="twitter:description"]';
+  function rebrandText(text) {
+    if (!text) return text;
+    return BRAND_RULES.reduce((out, [pattern, replacement]) => out.replace(pattern, replacement), text);
+  }
+  function rebrandTree(root, document2) {
+    const walker = document2.createTreeWalker(
+      root,
+      4
+      /* NodeFilter.SHOW_TEXT */
+    );
+    let node = walker.nextNode();
+    while (node) {
+      const next = rebrandText(node.nodeValue);
+      if (next !== node.nodeValue) node.nodeValue = next;
+      node = walker.nextNode();
+    }
+    root.querySelectorAll("*").forEach((el) => {
+      TEXT_ATTRS.forEach((attr) => {
+        const value = el.getAttribute(attr);
+        if (value) {
+          const next = rebrandText(value);
+          if (next !== value) el.setAttribute(attr, next);
+        }
+      });
+      if (el.tagName === "A") {
+        const href = el.getAttribute("href") || "";
+        if (href.startsWith("mailto:")) el.setAttribute("href", rebrandText(href));
+      }
+    });
+  }
+  function transform3(hookName, element, payload) {
+    if (hookName !== TransformHook2.beforeTransform) return;
+    const { document: document2 } = payload;
+    if (document2.title) document2.title = rebrandText(document2.title);
+    document2.querySelectorAll(TEXT_META).forEach((meta) => {
+      meta.setAttribute("content", rebrandText(meta.getAttribute("content")));
+    });
+    rebrandTree(element, document2);
   }
 
   // tools/importer/import.js
@@ -838,7 +903,7 @@ var CustomImportScript = (() => {
     return pageBlocks;
   }
   function executeTransformers(hookName, element, payload) {
-    const transformers = [transform, transform2];
+    const transformers = [transform, transform2, transform3];
     transformers.forEach((transformerFn) => {
       try {
         transformerFn.call(null, hookName, element, payload);

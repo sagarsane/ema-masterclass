@@ -31,17 +31,21 @@ export function getContentRoot() {
     while (root.length > 0 && ['blog'].includes(root[root.length - 1])) {
       root.pop();
     }
-    return `/${root.join('/')}`;
+    // Empty root must stay '' — '/' would yield a protocol-relative '//nav' URL
+    return root.length ? `/${root.join('/')}` : '';
   }
   return '';
 }
 
-/** Shared brand logo SVG + text used by header and footer */
+/**
+ * Shared brand logo used by header and footer: lightning bolt on a gradient
+ * shield (shape + gradient come from CSS so the markup carries no SVG ids).
+ */
 export const BRAND_LOGO = `<span class="nav-logo-icon" aria-hidden="true">
-  <svg width="100%" height="100%" viewBox="0 0 33 33" preserveAspectRatio="xMidYMid meet">
-    <path d="M28,0H5C2.24,0,0,2.24,0,5v23c0,2.76,2.24,5,5,5h23c2.76,0,5-2.24,5-5V5c0-2.76-2.24-5-5-5ZM29,17c-6.63,0-12,5.37-12,12h-1c0-6.63-5.37-12-12-12v-1c6.63,0,12-5.37,12-12h1c0,6.63,5.37,12,12,12v1Z" fill="currentColor"/>
+  <svg width="100%" height="100%" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false">
+    <path d="M13.5 2 5 13.2h5.6L9.4 21 18 9.6h-5.7z" fill="currentColor"/>
   </svg>
-</span><span class="nav-logo-text">WKND<br>Adventures</span>`;
+</span><span class="nav-logo-text">Rockstar <span>Adventures</span></span>`;
 
 /**
  * Builds hero block and prepends to main in a new section.

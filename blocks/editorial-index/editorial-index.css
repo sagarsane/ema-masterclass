@@ -1,24 +1,26 @@
-/* Editorial Index block — numbered items with large accent numbers */
+/* Editorial Index block — numbered items with large gradient numbers */
 
 .editorial-index > div {
   display: grid;
   grid-template-columns: 60px 1fr;
   gap: var(--gap-lg);
   align-items: start;
-  border-top: 1px solid var(--accent-color);
+  border-top: 1px solid var(--border-color);
   padding: var(--gap-xl) 0;
 }
 
 .editorial-index > div:last-child {
-  border-bottom: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* number column */
 .editorial-index > div > div:first-child {
   font-family: var(--heading-font-family);
   font-size: 48px;
-  font-weight: 700;
-  color: var(--accent-color);
+  font-weight: 900;
+  background: var(--brand-gradient);
+  background-clip: text;
+  color: transparent;
   letter-spacing: -0.03em;
   line-height: 48px;
 }
@@ -26,7 +28,7 @@
 /* strip margin from any <p> EDS wraps around the number text */
 .editorial-index > div > div:first-child p {
   margin: 0;
-  color: inherit;
+  color: transparent;
   font: inherit;
   letter-spacing: inherit;
   line-height: inherit;

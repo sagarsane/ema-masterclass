@@ -2,7 +2,7 @@
 /* global WebImporter */
 
 /**
- * Transformer: WKND sections (generic).
+ * Transformer: sections (generic).
  * Detects section boundaries and styles from CSS classes on the source page.
  * No template dependency — works on any page.
  *

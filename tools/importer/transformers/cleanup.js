@@ -2,8 +2,8 @@
 /* global WebImporter */
 
 /**
- * Transformer: WKND cleanup.
- * Removes non-authorable site chrome from the WKND source pages.
+ * Transformer: source cleanup.
+ * Removes non-authorable site chrome from the source pages (wknd-adventures.com).
  * Selectors from captured DOM (migration-work/cleaned.html).
  */
 const TransformHook = { beforeTransform: 'beforeTransform', afterTransform: 'afterTransform' };
@@ -87,9 +87,29 @@ export default function transform(hookName, element, payload) {
     });
   }
   if (hookName === TransformHook.afterTransform) {
+    const sourceUrl = payload.params && payload.params.originalURL;
+
+    // Rewrite internal page links to clean EDS paths: "../field-notes.html" or
+    // "https://wknd-adventures.com/blog/x.html" -> "/field-notes", "/blog/x"
+    if (sourceUrl) {
+      const { host } = new URL(sourceUrl);
+      element.querySelectorAll('a[href]').forEach((a) => {
+        const href = a.getAttribute('href');
+        if (/^(mailto:|tel:|#|javascript:)/i.test(href)) return;
+        try {
+          const target = new URL(href, sourceUrl);
+          if (target.host !== host && !/(^|\.)wknd-?adventures\.com$/i.test(target.host)) return;
+          let path = target.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+          if (path.length > 1) path = path.replace(/\/$/, '');
+          a.setAttribute('href', `${path}${target.search}${target.hash}`);
+        } catch (e) {
+          // leave malformed hrefs untouched
+        }
+      });
+    }
+
     // Resolve all relative image URLs to absolute using the source page URL
     // Runs after block parsing so parser-created images are also resolved
-    const sourceUrl = payload.params && payload.params.originalURL;
     if (sourceUrl) {
       element.querySelectorAll('img').forEach((img) => {
         const src = img.getAttribute('src');

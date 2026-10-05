@@ -95,5 +95,15 @@ export default async function decorate(block) {
     }
   }
 
+  // Column headings are authored as h4; the footer landmark starts a new outline,
+  // so promote them to h2 to keep heading levels sequential on every page
+  footer.querySelectorAll('.footer-top h4').forEach((h4) => {
+    const h2 = document.createElement('h2');
+    if (h4.id) h2.id = h4.id;
+    h2.className = 'footer-heading';
+    h2.append(...h4.childNodes);
+    h4.replaceWith(h2);
+  });
+
   block.append(footer);
 }

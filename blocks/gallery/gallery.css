@@ -4,7 +4,7 @@
 
 .gallery-container {
   --gallery-gap: var(--gap-lg, 24px);
-  --gallery-radius: var(--card-border-radius, 20px);
+  --gallery-radius: var(--card-border-radius, 22px);
   --gallery-img-height: 280px;
   --gallery-wide-height: 360px;
 }
@@ -41,6 +41,11 @@
   object-fit: cover;
   border-radius: var(--gallery-radius);
   display: block;
+  transition: transform var(--transition-normal);
+}
+
+.gallery > div picture:hover img {
+  transform: scale(1.03);
 }
 
 /* Wide image — last row when there are multiple rows */
@@ -81,11 +86,11 @@
   text-decoration-thickness: 1.5px;
   text-underline-offset: var(--text-link-underline-offset);
   white-space: nowrap;
-  color: var(--background-color);
+  color: var(--link-color);
 }
 
 /* Reset button styling on section header links — needs to beat
-   main > .section.dark a.button.primary (specificity 0,4,1) */
+   the global a.button.primary / .secondary pill styles */
 main .gallery-container > .default-content-wrapper a.button:any-link {
   background: none;
   border: none;
@@ -100,13 +105,16 @@ main .gallery-container > .default-content-wrapper a.button:any-link {
   font-size: var(--body-font-size-s);
   font-weight: 700;
   letter-spacing: var(--text-link-letter-spacing);
-  color: var(--background-color);
+  color: var(--link-color);
+  filter: none;
+  backdrop-filter: none;
 }
 
 main .gallery-container > .default-content-wrapper a.button:hover {
   transform: none;
   box-shadow: none;
-  opacity: 0.65;
+  background: none;
+  color: var(--link-hover-color);
 }
 
 /* --- Responsive --- */

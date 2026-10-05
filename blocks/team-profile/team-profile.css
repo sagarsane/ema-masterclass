@@ -22,24 +22,26 @@
   box-sizing: border-box;
   width: 128px;
   height: 128px;
+  padding: 3px;
   border-radius: 50%;
-  border: 3px solid var(--accent-color);
+  background: var(--brand-gradient);
+  box-shadow: var(--glow-shadow);
   object-fit: cover;
 }
 
-/* profile name — Syncopate heading font */
+/* profile name — Poppins heading font */
 .team-profile .team-profile-avatar > p:last-child {
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  color: var(--text-color);
+  font-weight: 800;
+  color: var(--heading-color);
   margin-top: var(--gap-sm);
 }
 
 /* profile role */
 .team-profile em {
   font-style: normal;
-  color: var(--text-color-muted);
+  color: var(--kicker-color);
   font-size: var(--body-font-size-s);
 }
 

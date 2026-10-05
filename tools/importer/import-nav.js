@@ -3,10 +3,12 @@
 /**
  * Nav fragment importer.
  * Parses the original site's navbar and produces the EDS nav fragment structure:
- *   Section 1 (brand): <p><a>WKND Adventures</a></p>
+ *   Section 1 (brand): <p><a>Rockstar Adventures</a></p>
  *   Section 2 (sections): nested <ul> with megamenu content
  *   Section 3 (tools): <p><strong><a>Subscribe</a></strong></p>
  */
+
+import { rebrandText } from './transformers/rockstar-brand.js';
 
 const BASE = '/';
 
@@ -34,7 +36,7 @@ export default {
     const brandP = document.createElement('p');
     const brandA = document.createElement('a');
     brandA.href = rewriteHref(logo?.getAttribute('href') || '/');
-    brandA.textContent = 'WKND Adventures';
+    brandA.textContent = 'Rockstar Adventures';
     brandP.appendChild(brandA);
     brandSection.appendChild(brandP);
     result.appendChild(brandSection);
@@ -75,7 +77,7 @@ export default {
               if (descEl) {
                 const br = document.createElement('br');
                 li.appendChild(br);
-                li.appendChild(document.createTextNode(descEl.textContent.trim()));
+                li.appendChild(document.createTextNode(rebrandText(descEl.textContent.trim())));
               }
               subUl.appendChild(li);
             });
@@ -100,7 +102,7 @@ export default {
                 if (descEl) {
                   const br = document.createElement('br');
                   li.appendChild(br);
-                  li.appendChild(document.createTextNode(descEl.textContent.trim()));
+                  li.appendChild(document.createTextNode(rebrandText(descEl.textContent.trim())));
                 }
                 artSubUl.appendChild(li);
               });
