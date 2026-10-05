@@ -19,7 +19,9 @@
 .featured-article .featured-article-img-col {
   order: 0;
   overflow: hidden;
+  border: 1px solid var(--border-color-light);
   border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow);
   max-height: 30rem;
 }
 
@@ -54,6 +56,7 @@
 
 .featured-article h2 {
   margin-top: var(--gap-sm);
+  font-weight: 900;
 }
 
 .featured-article .featured-article-content p:not(.tag-pill) {
@@ -63,36 +66,38 @@
 /* button paragraph — separator line + right-aligned on desktop */
 .featured-article .featured-article-content p:last-child {
   margin-top: var(--gap-sm);
-  padding-top: var(--gap-xs);
+  padding-top: var(--gap-md);
   border-top: 1px solid var(--border-color-light);
 }
 
-/* style link as dark button */
+/* style link as brand gradient pill button */
 .featured-article .featured-article-content p:last-child a:any-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-  letter-spacing: 0.98px;
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
   text-decoration: none;
-  padding: var(--gap-xs) var(--gap-xl);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  padding: var(--button-padding);
+  background-color: #c2410c;
+  background-image: var(--gradient-cta);
+  color: #fff;
+  border: 1px solid var(--border-color);
   border-radius: var(--button-border-radius);
-  box-shadow: 3px 3px 0 var(--accent-color);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow);
+  transition: var(--button-transition);
 }
 
 .featured-article .featured-article-content p:last-child a:hover {
   transform: translateY(-2px);
-  box-shadow: 5px 5px 0 var(--accent-color);
+  box-shadow: var(--button-hover-shadow);
+  text-decoration: none;
 }
 
 .featured-article .featured-article-content p:last-child a:active {
   transform: translateY(0);
-  box-shadow: 0 0 0 var(--accent-color);
 }
 
 @media (width >= 768px) {

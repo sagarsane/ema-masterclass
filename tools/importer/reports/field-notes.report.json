@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/field-notes",
+  "path": "field-notes",
+  "timestamp": "2026-09-24T21:11:18.459Z",
+  "title": "Field Notes — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "featured-article",
+    "cards-article"
+  ]
+}

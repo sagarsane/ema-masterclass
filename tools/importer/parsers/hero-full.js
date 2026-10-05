@@ -23,7 +23,7 @@ export default function parse(element, { document }) {
   // Row 2: Content — eyebrow, heading, lead, CTAs
   const contentCell = [];
 
-  // Eyebrow: p.tag (e.g., "WKND Adventures")
+  // Eyebrow: p.tag (e.g., "Rockstar Adventures" once rebranded)
   const eyebrow = inner && (inner.querySelector('.tag') || inner.querySelector('.hero-eyebrow'));
   if (eyebrow) {
     const p = document.createElement('p');

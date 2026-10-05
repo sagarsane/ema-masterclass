@@ -1,3 +1,4 @@
+/* eslint-disable */
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -648,7 +649,7 @@ var CustomImportScript = (() => {
     element.replaceWith(block);
   }
 
-  // tools/importer/transformers/wknd-cleanup.js
+  // tools/importer/transformers/cleanup.js
   var TransformHook = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
   function transform(hookName, element, payload) {
     if (hookName === TransformHook.beforeTransform) {
@@ -729,7 +730,7 @@ var CustomImportScript = (() => {
     }
   }
 
-  // tools/importer/transformers/wknd-sections.js
+  // tools/importer/transformers/sections.js
   var STYLE_MAP = {
     "inverse-section": "dark",
     "secondary-section": "secondary",
@@ -782,6 +783,50 @@ var CustomImportScript = (() => {
         sectionEl.before(hr);
       }
     }
+  }
+
+  // tools/importer/transformers/brand.js
+  var TransformHook2 = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
+  var BRAND_NAME = "Rockstar Adventures";
+  var TEXT_RULES = [
+    [/wknd-adventures\.com/gi, "rockstar-adventures.com"],
+    [/WKND Adventures/gi, BRAND_NAME],
+    [/\bWKND\b/g, "Rockstar"]
+  ];
+  function rebrandText(value) {
+    if (!value) return value;
+    return TEXT_RULES.reduce((out, [pattern, replacement]) => out.replace(pattern, replacement), value);
+  }
+  function rebrandElement(root, document2) {
+    if (!root) return;
+    const SHOW_TEXT = 4;
+    const walker = document2.createTreeWalker(root, SHOW_TEXT);
+    let node = walker.nextNode();
+    while (node) {
+      const next = rebrandText(node.nodeValue);
+      if (next !== node.nodeValue) node.nodeValue = next;
+      node = walker.nextNode();
+    }
+    root.querySelectorAll("[alt], [title]").forEach((el) => {
+      ["alt", "title"].forEach((attr) => {
+        if (el.hasAttribute(attr)) el.setAttribute(attr, rebrandText(el.getAttribute(attr)));
+      });
+    });
+    root.querySelectorAll('a[href^="mailto:" i]').forEach((a) => {
+      a.setAttribute("href", rebrandText(a.getAttribute("href")));
+    });
+  }
+  function rebrandHead(document2) {
+    if (document2.title) document2.title = rebrandText(document2.title);
+    document2.querySelectorAll("head meta[content]").forEach((meta) => {
+      meta.setAttribute("content", rebrandText(meta.getAttribute("content")));
+    });
+  }
+  function transform3(hookName, element, payload) {
+    if (hookName !== TransformHook2.afterTransform) return;
+    const { document: document2 } = payload;
+    rebrandElement(element, document2);
+    rebrandHead(document2);
   }
 
   // tools/importer/import.js
@@ -838,7 +883,7 @@ var CustomImportScript = (() => {
     return pageBlocks;
   }
   function executeTransformers(hookName, element, payload) {
-    const transformers = [transform, transform2];
+    const transformers = [transform, transform2, transform3];
     transformers.forEach((transformerFn) => {
       try {
         transformerFn.call(null, hookName, element, payload);

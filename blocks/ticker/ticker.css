@@ -14,8 +14,8 @@ main > .section.ticker-container {
 .ticker {
   overflow: hidden;
   white-space: nowrap;
-  border-top: 1px solid var(--accent-color);
-  border-bottom: 1px solid var(--accent-color);
+  border-block: 1px solid var(--glass-border);
+  background-color: rgb(255 255 255 / 3%);
   padding: var(--gap-md) 0;
 }
 
@@ -32,13 +32,14 @@ main > .section.ticker-container {
   flex-shrink: 0;
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-m);
-  font-weight: 700;
-  letter-spacing: -0.48px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
   line-height: 32px;
-  color: var(--dark-color);
+  text-transform: uppercase;
+  color: var(--text-color);
 }
 
-/* separator dots — accent orange */
+/* separator — rockstar star */
 .ticker .ticker-track .ticker-sep {
   color: var(--accent-color);
 }

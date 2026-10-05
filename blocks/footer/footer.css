@@ -1,15 +1,23 @@
 /* stylelint-disable no-descending-specificity */
 
 /* ----------------------------------------------------------------
-   Footer — dark inverse with accent top border
+   Footer — deep navy with brand gradient top rule
    ---------------------------------------------------------------- */
 footer {
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  position: relative;
+  background-color: var(--footer-background-color);
+  color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
-  border-top: 4px solid var(--accent-color);
   padding: var(--gap-3xl) 0;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--gradient-brand);
 }
 
 footer .footer > div {
@@ -29,7 +37,7 @@ footer a:any-link {
 }
 
 footer a:hover {
-  color: var(--background-color);
+  color: var(--link-hover-color);
 }
 
 /* Reset section styling inside footer (boilerplate fragment structure) */
@@ -57,11 +65,12 @@ footer .footer-top {
 
 /* Column headings */
 footer h4 {
-  font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-s);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
   font-weight: 700;
-  letter-spacing: 0.7px;
-  color: var(--background-color);
+  letter-spacing: var(--kicker-letter-spacing);
+  text-transform: uppercase;
+  color: var(--kicker-color);
   margin: 0 0 var(--gap-md);
 }
 
@@ -90,38 +99,23 @@ footer li a {
 footer .footer-brand-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--gap-sm);
-  color: var(--background-color);
+  gap: 10px;
+  color: var(--text-color);
   margin-bottom: var(--gap-md);
 }
 
 footer .footer-brand-link:hover {
-  color: var(--background-color);
-}
-
-footer .nav-logo-icon {
-  width: var(--logo-icon-size);
-  height: var(--logo-icon-size);
-  flex-shrink: 0;
-}
-
-footer .nav-logo-icon svg {
-  display: block;
-  color: var(--background-color);
-  fill: var(--background-color);
-}
-
-footer .nav-logo-icon img {
-  filter: brightness(0) invert(1);
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 footer .nav-logo-text {
   font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-xs);
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
   letter-spacing: var(--brand-letter-spacing);
-  line-height: 1.2;
-  color: var(--background-color);
+  line-height: 1.1;
+  color: var(--text-color);
 }
 
 /* Tagline below brand */
@@ -148,13 +142,13 @@ footer .footer-bottom .default-content-wrapper {
   justify-content: space-between;
   align-items: center;
   gap: var(--gap-md);
-  border-top: 1px solid var(--text-color-subtle);
+  border-top: 1px solid var(--border-color-light);
   padding-top: var(--gap-xl);
 }
 
 footer .footer-bottom p {
   font-size: var(--body-font-size-s);
-  color: var(--footer-link-color);
+  color: var(--text-color-subtle);
 }
 
 

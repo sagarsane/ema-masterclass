@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/blog/yosemite-rock-climbing.html",
+  "path": "blog/yosemite-rock-climbing",
+  "timestamp": "2026-09-24T21:12:12.989Z",
+  "title": "First Light on the Valley — Rockstar Adventures",
+  "blocks": [
+    "hero-article",
+    "columns-pullquote",
+    "cards-article",
+    "gallery"
+  ]
+}

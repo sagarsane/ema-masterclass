@@ -1,27 +1,43 @@
 /* stylelint-disable no-descending-specificity -- consolidated variant file */
 
 /*
- * WKND Adventures - Edge Delivery Services
- * Design system migrated from https://wknd-adventures.com/
+ * Rockstar Adventures - Edge Delivery Services
+ * Dark design system inspired by https://rockstar.adobeevents.com/en/masterclass
  */
 
 :root {
+  /* brand palette */
+  --brand-orange: #f97316;
+  --brand-magenta: #c026d3;
+  --brand-violet: #7c3aed;
+  --brand-peach: #ffd7b0;
+
   /* colors */
-  --background-color: #fff;
-  --text-color: #0f1a14;
-  --text-color-muted: #7a8a80;
-  --text-color-subtle: #3d4f45;
-  --accent-color: #e8651a;
-  --light-color: #f0ece4;
-  --dark-color: #0f1a14;
-  --cream-color: #f5f0e8;
-  --forest-color: #1a3a2e;
-  --border-color: #c8c2b8;
-  --border-color-light: #ddd8cf;
+  --background-color: #0b0b10;
+  --surface-color: #10121a;
+  --surface-raised-color: #171429;
+  --nav-background-color: rgb(10 17 37 / 92%);
+  --text-color: #eef0f4;
+  --text-color-muted: #c5c8d2;
+  --text-color-subtle: #9aa0b0;
+  --text-on-accent: #fff;
+  --accent-color: var(--brand-orange);
+  --kicker-color: var(--brand-peach);
+  --border-color: rgb(255 255 255 / 18%);
+  --border-color-light: rgb(255 255 255 / 8%);
+
+  /* gradients — decorative uses the vivid brand pair; text-bearing
+     gradients use deeper stops so white text meets WCAG AA (4.5:1) */
+  --gradient-brand: linear-gradient(135deg, var(--brand-orange), var(--brand-magenta));
+  --gradient-cta: linear-gradient(135deg, #c2410c, var(--brand-magenta));
+  --gradient-accent-section: linear-gradient(135deg, #c2410c 0%, #a21caf 55%, #6d28d9 100%);
+  --page-glow:
+    radial-gradient(1200px 600px at 80% -10%, rgb(238 90 36 / 55%) 0%, transparent 60%),
+    radial-gradient(900px 600px at 10% 10%, rgb(109 40 217 / 55%) 0%, transparent 60%);
 
   /* fonts */
-  --body-font-family: 'Instrument Sans', instrument-sans-fallback, sans-serif;
-  --heading-font-family: syncopate, syncopate-fallback, sans-serif;
+  --body-font-family: roboto, roboto-fallback, sans-serif;
+  --heading-font-family: poppins, poppins-fallback, sans-serif;
 
   /* body sizes (mobile-first) */
   --body-font-size-m: 16px;
@@ -29,7 +45,7 @@
   --body-font-size-xs: 12px;
 
   /* heading sizes (mobile-first) */
-  --heading-font-size-xxl: 32px;
+  --heading-font-size-xxl: 36px;
   --heading-font-size-xl: 28px;
   --heading-font-size-l: 22px;
   --heading-font-size-m: 18px;
@@ -53,68 +69,83 @@
   --nav-height: 64px;
 
   /* buttons */
-  --button-font-family: syncopate, syncopate-fallback, sans-serif;
-  --button-font-size: 14px;
+  --button-font-family: var(--body-font-family);
+  --button-font-size: 16px;
   --button-font-weight: 700;
-  --button-letter-spacing: 0.98px;
-  --button-border-radius: 9999px;
-  --button-padding: 13px 32px 11px;
-  --button-transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s,
-    color 0.15s, border-color 0.15s;
-  --btn-shadow: var(--accent-color);
+  --button-letter-spacing: 0.2px;
+  --button-border-radius: 999px;
+  --button-padding: 12px 26px;
+  --button-transition: transform 0.16s, filter 0.2s, box-shadow 0.2s, background-color 0.2s,
+    color 0.2s, border-color 0.2s;
 
   /* links */
-  --link-color: #e8651a;
-  --link-hover-color: #c9530e;
+  --link-color: #fb923c;
+  --link-hover-color: var(--brand-peach);
 
   /* transitions */
   --transition-fast: 0.15s;
   --transition-normal: 0.3s ease;
 
   /* border radii */
-  --border-radius-sm: 8px;
-  --card-border-radius: 20px;
+  --border-radius-sm: 12px;
+  --card-border-radius: 22px;
+
+  /* hover glow for gradient buttons (brightening would drop white-text contrast below AA) */
+  --button-hover-shadow: 0 12px 34px rgb(192 38 211 / 45%), 0 4px 14px rgb(249 115 22 / 30%);
 
   /* card shared patterns */
-  --card-hover-shadow: 0 4px 20px rgb(0 0 0 / 8%);
-  --card-hover-transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  --shadow: 0 10px 30px rgb(0 0 0 / 45%);
+  --card-hover-shadow: 0 16px 40px rgb(0 0 0 / 55%), 0 0 0 1px rgb(249 115 22 / 35%);
+  --card-hover-transition: transform 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 
-  /* tag pill shared patterns — asymmetric padding optically centers uppercase text */
-  --tag-padding: 5px 8px 3px;
-  --tag-font-size: 10.4px;
-  --tag-letter-spacing: 0.52px;
+  /* tag pill (chip) shared patterns */
+  --tag-padding: 4px 10px;
+  --tag-font-size: 12.5px;
+  --tag-letter-spacing: 0.2px;
+  --chip-bg: rgb(124 58 237 / 25%);
+  --chip-border: rgb(124 58 237 / 55%);
 
-  /* text link (Syncopate underlined link pattern) */
-  --text-link-letter-spacing: 0.84px;
-  --text-link-underline-offset: 3px;
+  /* kicker (uppercase eyebrow) */
+  --kicker-font-size: 14.4px;
+  --kicker-letter-spacing: 0.18em;
+
+  /* text link (underlined link pattern) */
+  --text-link-letter-spacing: 0.2px;
+  --text-link-underline-offset: 4px;
 
   /* brand */
-  --logo-icon-size: 32px;
-  --brand-letter-spacing: 0.6px;
+  --logo-icon-size: 34px;
+  --brand-letter-spacing: 0.2px;
 
   /* footer */
-  --footer-link-color: #999;
+  --footer-background-color: rgb(10 17 37);
+  --footer-link-color: var(--text-color-muted);
 
-  /* dark section / overlay text */
-  --text-on-dark: rgb(255 255 255 / 85%);
-  --text-on-dark-muted: rgb(255 255 255 / 55%);
+  /* text on image / overlay */
+  --text-on-dark: var(--text-color);
+  --text-on-dark-muted: var(--text-color-muted);
 
-  /* glass card (dark section) */
+  /* glass card */
   --glass-bg: rgb(255 255 255 / 6%);
   --glass-border: rgb(255 255 255 / 12%);
+
+  color-scheme: dark;
 }
 
-/* fallback fonts */
+/* fallback fonts — metrics tuned to minimise layout shift on swap */
 @font-face {
-  font-family: instrument-sans-fallback;
-  size-adjust: 91%;
+  font-family: roboto-fallback;
+  size-adjust: 99.529%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: syncopate-fallback;
-  size-adjust: 138%;
-  src: local('Arial Black'), local('Arial');
+  font-family: poppins-fallback;
+  size-adjust: 112.5%;
+  ascent-override: 93%;
+  descent-override: 31%;
+  line-gap-override: 0%;
+  src: local('Arial');
 }
 
 /* desktop — content reflow breakpoint */
@@ -123,15 +154,15 @@
     --body-font-size-m: 18px;
     --body-font-size-s: 16px;
     --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 56px;
+    --heading-font-size-xxl: 60px;
     --heading-font-size-xl: 40px;
-    --heading-font-size-l: 32px;
-    --heading-font-size-m: 24px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 14px;
-    --section-padding: 64px 0;
+    --heading-font-size-l: 30px;
+    --heading-font-size-m: 22px;
+    --heading-font-size-s: 18px;
+    --heading-font-size-xs: 16px;
+    --section-padding: 72px 0;
     --container-padding: 0 24px;
-    --nav-height: 75px;
+    --nav-height: 72px;
   }
 }
 
@@ -141,14 +172,23 @@ body {
   display: none;
   margin: 0;
   background-color: var(--background-color);
+  background-image: var(--page-glow), linear-gradient(var(--surface-raised-color), var(--background-color) 900px);
+  background-repeat: no-repeat;
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 body.appear {
   display: block;
+}
+
+/* keep the brand glow in view while scrolling on larger screens */
+@media (width >= 1024px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 header {
@@ -168,6 +208,11 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
+::selection {
+  background-color: var(--brand-magenta);
+  color: #fff;
+}
+
 /* --- TYPOGRAPHY --- */
 
 h1,
@@ -180,20 +225,25 @@ h6 {
   margin-bottom: var(--gap-xs);
   font-family: var(--heading-font-family);
   font-weight: 700;
+  line-height: 1.15;
+  scroll-margin: calc(var(--nav-height) + 16px);
+  letter-spacing: -0.01em;
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 900;
   line-height: 1.1;
-  scroll-margin: 40px;
-  letter-spacing: -0.02em;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
+h2 {
+  font-size: var(--heading-font-size-xl);
+  font-weight: 800;
+}
+
 h3 { font-size: var(--heading-font-size-l); }
-
-h4 {
-  font-size: var(--heading-font-size-m);
-  letter-spacing: 0;
-}
-
+h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 
 h6 {
@@ -213,7 +263,12 @@ blockquote {
 
 p {
   color: var(--text-color);
-  line-height: 1.7;
+  line-height: 1.6;
+}
+
+/* list markers pick up the brand orange */
+main li::marker {
+  color: var(--accent-color);
 }
 
 /* --- VERTICAL RHYTHM: Default content flow --- */
@@ -259,15 +314,17 @@ pre {
 
 pre {
   padding: var(--gap-md);
+  border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-sm);
-  background-color: var(--light-color);
+  background-color: var(--surface-color);
   overflow-x: auto;
   white-space: pre;
 }
 
-/* blockquote — amber left border, italic */
+/* blockquote — brand gradient rule, italic */
 blockquote {
-  border-left: 4px solid var(--accent-color);
+  border-left: 4px solid transparent;
+  border-image: var(--gradient-brand) 1;
   margin: var(--gap-lg) 0;
   padding: var(--gap-md) var(--gap-lg);
   font-style: italic;
@@ -277,7 +334,7 @@ blockquote {
 
 blockquote p {
   margin-bottom: var(--gap-sm);
-  color: var(--text-color-subtle);
+  color: var(--text-color-muted);
 }
 
 blockquote p:last-child {
@@ -314,16 +371,39 @@ main img {
   width: 100%;
 }
 
-/* --- TAG PILL: shared eyebrow / category label --- */
+/* --- BRAND LOGO: gradient tile with bolt, shared by header + footer --- */
+
+.nav-logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--gradient-brand);
+  box-shadow: 0 6px 18px rgb(192 38 211 / 35%);
+  color: #fff;
+}
+
+.nav-logo-icon svg {
+  display: block;
+  width: 70%;
+  height: 70%;
+}
+
+/* --- TAG PILL: shared category chip --- */
 
 .tag-pill {
   display: inline-block;
   font-family: var(--heading-font-family);
   font-size: var(--tag-font-size);
-  font-weight: 600;
+  font-weight: 800;
+  line-height: 1.25;
   letter-spacing: var(--tag-letter-spacing);
-  background-color: var(--accent-color);
-  color: var(--background-color);
+  background-color: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  color: var(--text-color);
   padding: var(--tag-padding);
   border-radius: var(--button-border-radius);
 }
@@ -340,12 +420,13 @@ a:any-link {
 a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
+  text-underline-offset: var(--text-link-underline-offset);
 }
 
 /* focus ring — accessibility */
 *:focus-visible {
-  outline: 2px solid var(--dark-color);
-  outline-offset: 2px;
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 /* --- BUTTON SYSTEM --- */
@@ -372,7 +453,7 @@ a.button:any-link {
   justify-content: center;
   max-width: 100%;
   margin: 0;
-  border: 2px solid transparent;
+  border: 1px solid var(--border-color);
   border-radius: var(--button-border-radius);
   padding: var(--button-padding);
   font-family: var(--button-font-family);
@@ -385,48 +466,56 @@ a.button:any-link {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  box-shadow: 3px 3px 0 0 var(--btn-shadow, var(--accent-color));
+  box-shadow: var(--shadow);
   transition: var(--button-transition);
 }
 
 a.button:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--btn-shadow, var(--accent-color));
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
 a.button:active {
-  transform: translate(0, 0);
-  box-shadow: 0 0 0 0 var(--btn-shadow, var(--accent-color));
+  transform: translateY(0);
 }
 
-
-/* Primary: dark bg, white text */
+/* Primary: brand gradient pill, white text */
 a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--background-color);
+  background-color: #c2410c;
+  background-image: var(--gradient-cta);
+  color: #fff;
 }
 
-/* Secondary/Ghost: transparent bg, border matches context */
+a.button.primary:hover {
+  color: #fff;
+  box-shadow: var(--button-hover-shadow);
+}
+
+/* Secondary/Ghost: transparent with frosted glass + light outline */
 a.button.secondary {
-  border-color: var(--dark-color);
+  border-color: rgb(255 255 255 / 40%);
   background-color: transparent;
-  color: var(--dark-color);
+  color: #fff;
+  backdrop-filter: blur(6px);
 }
 
 a.button.secondary:hover {
-  background-color: var(--dark-color);
+  border-color: #fff;
+  background-color: rgb(255 255 255 / 10%);
+  color: #fff;
+}
+
+/* Accent: solid bright orange, dark text (high-impact CTA) */
+a.button.accent {
+  border-color: var(--brand-orange);
+  background-color: var(--brand-orange);
   color: var(--background-color);
 }
 
-/* Accent: orange bg, dark text (hero) */
-a.button.accent {
-  border-color: var(--accent-color);
-  background-color: var(--accent-color);
-  color: var(--dark-color);
+a.button.accent:hover {
+  color: var(--background-color);
+  filter: brightness(1.08);
 }
-
 
 /* button groups — stack on mobile */
 @media (width < 768px) {
@@ -472,68 +561,36 @@ main > .section:not(:has(> *)) {
 
 /* --- SECTION METADATA STYLES --- */
 
-/* Highlight / Light: beige bg */
-main .section.light,
-main .section.highlight {
-  background-color: var(--light-color);
+/* Secondary / Light / Highlight: subtle lifted glass band */
+main > .section.light,
+main > .section.highlight,
+main > .section.secondary {
+  background-color: rgb(255 255 255 / 3%);
+  border-block: 1px solid rgb(255 255 255 / 6%);
 }
 
-/* Dark: dark bg, white text */
+/* Dark: deep violet surface with a soft brand glow */
 main > .section.dark {
-  background-color: var(--dark-color);
-  color: var(--background-color);
-
-  --btn-shadow: var(--accent-color);
-}
-
-main > .section.dark h1,
-main > .section.dark h2,
-main > .section.dark h3,
-main > .section.dark h4,
-main > .section.dark h5,
-main > .section.dark h6 {
-  color: var(--background-color);
+  background-color: var(--surface-raised-color);
+  background-image:
+    radial-gradient(700px 360px at 0% 0%, rgb(124 58 237 / 28%) 0%, transparent 70%),
+    radial-gradient(600px 320px at 100% 100%, rgb(249 115 22 / 16%) 0%, transparent 70%);
+  color: var(--text-color);
 }
 
 main > .section.dark p:not(.tag-pill) {
-  color: var(--text-on-dark);
+  color: var(--text-color-muted);
 }
 
 main > .section.dark a:any-link:not(.button) {
-  color: var(--accent-color);
+  color: var(--link-color);
 }
 
-/* dark section: primary button inverts to white fill + amber shadow */
-main > .section.dark a.button.primary {
-  border-color: var(--background-color);
-  background-color: var(--background-color);
-  color: var(--dark-color);
-}
-
-/* dark section: ghost button uses white outline */
-main > .section.dark a.button.secondary {
-  border-color: rgb(255 255 255 / 50%);
-  background-color: transparent;
-  color: var(--background-color);
-}
-
-main > .section.dark a.button.secondary:hover {
-  background-color: var(--background-color);
-  border-color: var(--background-color);
-  color: var(--dark-color);
-}
-
-/* dark section: focus ring uses white */
-main > .section.dark *:focus-visible {
-  outline-color: var(--background-color);
-}
-
-/* Accent: orange bg, dark text */
+/* Accent: full brand gradient band, white text */
 main > .section.accent {
-  background-color: var(--accent-color);
-  color: var(--dark-color);
-
-  --btn-shadow: var(--background-color);
+  background-color: #a21caf;
+  background-image: var(--gradient-accent-section);
+  color: var(--text-on-accent);
 }
 
 main > .section.accent h1,
@@ -541,34 +598,37 @@ main > .section.accent h2,
 main > .section.accent h3,
 main > .section.accent h4,
 main > .section.accent h5,
-main > .section.accent h6 {
-  color: var(--dark-color);
-}
-
+main > .section.accent h6,
 main > .section.accent p {
-  color: var(--dark-color);
+  color: var(--text-on-accent);
 }
 
 main > .section.accent > div > p:not(.tag-pill) {
   font-size: 20px;
 }
 
-/* accent section: primary button uses black fill + white shadow */
+main > .section.accent a:any-link:not(.button) {
+  color: var(--text-on-accent);
+  text-decoration: underline;
+}
+
+/* accent section: primary button inverts to white fill */
 main > .section.accent a.button.primary {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
+  border-color: #fff;
+  background: #fff;
   color: var(--background-color);
 }
 
 main > .section.accent a.button.secondary {
-  border-color: var(--dark-color);
-  color: var(--dark-color);
-  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
 }
 
-/* Secondary: light bg (kept for backward compatibility) */
-main > .section.secondary {
-  background-color: var(--light-color);
+/* Accent section: tag pill on translucent dark */
+main .section.accent .tag-pill {
+  background-color: rgb(0 0 0 / 25%);
+  border-color: rgb(255 255 255 / 35%);
+  color: #fff;
 }
 
 /* Narrow: constrains content to narrow max-width */
@@ -590,11 +650,6 @@ main > .section.center .button-wrapper {
   margin: 4px 8px;
 }
 
-/* Accent section: tag pill uses dark bg instead of accent */
-main .section.accent .tag-pill {
-  background-color: var(--dark-color);
-}
-
 /* Body paragraphs in dark/narrow sections */
 main .section.dark.narrow p:not(.tag-pill) {
   font-size: var(--body-font-size-m);
@@ -612,12 +667,21 @@ main .section.dark.narrow h2 {
   max-width: var(--container-narrow-max-width);
 }
 
+.hero-container:has(.article) + .section > div > p {
+  color: var(--text-color-muted);
+}
+
 /* image captions in article body */
 .hero-container:has(.article) + .section > div > p:has(> img) + p {
   font-size: var(--body-font-size-s);
-  color: var(--text-color-muted);
+  color: var(--text-color-subtle);
   font-style: italic;
   margin-top: -8px;
+}
+
+.hero-container:has(.article) + .section > div > p > img,
+.hero-container:has(.article) + .section > div > p > picture img {
+  border-radius: var(--card-border-radius);
 }
 
 /* --- BUTTON GROUP --- */
@@ -628,7 +692,6 @@ main .section.dark.narrow h2 {
   gap: var(--gap-xs);
   margin: var(--gap-xs) 0;
 }
-
 
 main .default-content-wrapper .button-group p.button-wrapper {
   margin: 0;

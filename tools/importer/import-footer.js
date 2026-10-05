@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { BRAND_NAME, rebrandText } from './transformers/brand.js';
 
 /**
  * Footer fragment importer.
@@ -42,14 +43,14 @@ export default {
           const brandP = document.createElement('p');
           const brandA = document.createElement('a');
           brandA.href = rewriteHref('/');
-          brandA.textContent = 'WKND Adventures';
+          brandA.textContent = BRAND_NAME;
           brandP.appendChild(brandA);
           colDiv.appendChild(brandP);
 
           const tagline = col.querySelector('p');
           if (tagline) {
             const tagP = document.createElement('p');
-            tagP.textContent = tagline.textContent.trim();
+            tagP.textContent = rebrandText(tagline.textContent.trim());
             colDiv.appendChild(tagP);
           }
         } else {
@@ -88,10 +89,12 @@ export default {
       const paragraphs = footerBottom.querySelectorAll('p');
       paragraphs.forEach((p) => {
         const newP = document.createElement('p');
-        newP.textContent = p.textContent.trim();
+        newP.textContent = rebrandText(p.textContent.trim());
         bottomSection.appendChild(newP);
       });
     }
+    // <hr> marks the section break (wrapper divs alone are flattened on conversion)
+    result.appendChild(document.createElement('hr'));
     result.appendChild(bottomSection);
 
     return [{

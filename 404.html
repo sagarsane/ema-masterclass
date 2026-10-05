@@ -7,13 +7,15 @@
     content="script-src 'nonce-aem' 'strict-dynamic' 'unsafe-inline' http: https:; base-uri 'self'; object-src 'none';"
     move-to-http-header="true"
   >
-  <title>Page not found — WKND Adventures</title>
+  <title>Page not found — Rockstar Adventures</title>
   <script nonce="aem" type="text/javascript">
     window.isErrorPage = true;
     window.errorCode = '404';
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Page not found — WKND Adventures">
+  <meta property="og:title" content="Page not found — Rockstar Adventures">
+  <meta name="theme-color" content="#0b0b10">
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
   <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
   <script nonce="aem" type="module">
     window.addEventListener('load', () => {
@@ -53,17 +55,25 @@
     .error-code {
       font-family: var(--heading-font-family);
       font-size: clamp(80px, 20vw, 200px);
-      font-weight: 700;
+      font-weight: 900;
       line-height: 1;
       letter-spacing: -0.04em;
       color: var(--accent-color);
       margin: 0 0 16px;
     }
 
+    @supports (background-clip: text) {
+      .error-code {
+        background: var(--gradient-brand);
+        background-clip: text;
+        color: transparent;
+      }
+    }
+
     .error-message {
       font-family: var(--heading-font-family);
       font-size: var(--heading-font-size-l);
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-color);
       margin: 0 0 12px;
     }
@@ -92,9 +102,9 @@
       <p class="error-code">404</p>
       <h1 class="error-message">Trail Not Found</h1>
       <p class="error-description">The route you're looking for doesn't exist — it may have moved, or you may have taken a wrong turn. Every good adventure has a few of those.</p>
-      <div class="error-actions">
+      <p class="error-actions">
         <a href="/" class="button primary">Go Home</a>
-      </div>
+      </p>
     </div>
   </main>
   <footer></footer>

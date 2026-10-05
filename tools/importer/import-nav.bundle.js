@@ -1,3 +1,4 @@
+/* eslint-disable */
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -22,14 +23,28 @@ var CustomImportScript = (() => {
   __export(import_nav_exports, {
     default: () => import_nav_default
   });
-  var BASE = "/content/wknd/";
+
+  // tools/importer/transformers/brand.js
+  var BRAND_NAME = "Rockstar Adventures";
+  var TEXT_RULES = [
+    [/wknd-adventures\.com/gi, "rockstar-adventures.com"],
+    [/WKND Adventures/gi, BRAND_NAME],
+    [/\bWKND\b/g, "Rockstar"]
+  ];
+  function rebrandText(value) {
+    if (!value) return value;
+    return TEXT_RULES.reduce((out, [pattern, replacement]) => out.replace(pattern, replacement), value);
+  }
+
+  // tools/importer/import-nav.js
+  var BASE = "/";
   function rewriteHref(href) {
     if (!href) return href;
     try {
       const p = new URL(href, "https://wknd-adventures.com").pathname.replace(/\/$/, "").replace(/\.html$/, "").replace(/^\//, "");
       if (!p || p === "index") return BASE.slice(0, -1) + "/";
       return BASE + p;
-    } catch {
+    } catch (e) {
       return href;
     }
   }
@@ -43,8 +58,8 @@ var CustomImportScript = (() => {
       const logo = navbar.querySelector(".logo");
       const brandP = document.createElement("p");
       const brandA = document.createElement("a");
-      brandA.href = rewriteHref(logo?.getAttribute("href") || "/");
-      brandA.textContent = "WKND Adventures";
+      brandA.href = rewriteHref((logo == null ? void 0 : logo.getAttribute("href")) || "/");
+      brandA.textContent = BRAND_NAME;
       brandP.appendChild(brandA);
       brandSection.appendChild(brandP);
       result.appendChild(brandSection);
@@ -53,8 +68,9 @@ var CustomImportScript = (() => {
       const menuItems = navbar.querySelectorAll(".nav-megamenu-item, .nav-menu-item");
       if (menuItems.length > 0) {
         menuItems.forEach((item) => {
+          var _a, _b, _c, _d, _e;
           const trigger = item.querySelector(".nav-megamenu-trigger, .nav-menu-trigger, button");
-          const label = trigger?.querySelector("span")?.textContent?.trim() || trigger?.textContent?.trim()?.replace(/\s+/g, " ") || "";
+          const label = ((_b = (_a = trigger == null ? void 0 : trigger.querySelector("span")) == null ? void 0 : _a.textContent) == null ? void 0 : _b.trim()) || ((_d = (_c = trigger == null ? void 0 : trigger.textContent) == null ? void 0 : _c.trim()) == null ? void 0 : _d.replace(/\s+/g, " ")) || "";
           const panel = item.querySelector(".nav-megamenu");
           const topLi = document.createElement("li");
           topLi.textContent = label;
@@ -65,17 +81,18 @@ var CustomImportScript = (() => {
               const articleLinks = [...links].filter((a) => a.classList.contains("nav-megamenu-article"));
               const subUl = document.createElement("ul");
               regularLinks.forEach((a) => {
+                var _a2, _b2, _c2;
                 const li = document.createElement("li");
                 const newA = document.createElement("a");
                 newA.href = rewriteHref(a.getAttribute("href"));
                 const titleEl = a.querySelector('[class*="title"]');
                 const descEl = a.querySelector('[class*="desc"]');
-                newA.textContent = titleEl?.textContent?.trim() || a.textContent?.trim()?.split("\n")[0];
+                newA.textContent = rebrandText(((_a2 = titleEl == null ? void 0 : titleEl.textContent) == null ? void 0 : _a2.trim()) || ((_c2 = (_b2 = a.textContent) == null ? void 0 : _b2.trim()) == null ? void 0 : _c2.split("\n")[0]));
                 li.appendChild(newA);
                 if (descEl) {
                   const br = document.createElement("br");
                   li.appendChild(br);
-                  li.appendChild(document.createTextNode(descEl.textContent.trim()));
+                  li.appendChild(document.createTextNode(rebrandText(descEl.textContent.trim())));
                 }
                 subUl.appendChild(li);
               });
@@ -84,20 +101,21 @@ var CustomImportScript = (() => {
                 const artUl = document.createElement("ul");
                 const artContainer = document.createElement("li");
                 const sectionLabel = panel.querySelector('[class*="label"]');
-                artContainer.textContent = sectionLabel?.textContent?.trim() || "Recent from the Field";
+                artContainer.textContent = ((_e = sectionLabel == null ? void 0 : sectionLabel.textContent) == null ? void 0 : _e.trim()) || "Recent from the Field";
                 const artSubUl = document.createElement("ul");
                 articleLinks.forEach((a) => {
+                  var _a2, _b2, _c2;
                   const li = document.createElement("li");
                   const newA = document.createElement("a");
                   newA.href = rewriteHref(a.getAttribute("href"));
                   const titleEl = a.querySelector('[class*="title"]');
                   const descEl = a.querySelector('[class*="desc"]');
-                  newA.textContent = titleEl?.textContent?.trim() || a.textContent?.trim()?.split("\n")[0];
+                  newA.textContent = rebrandText(((_a2 = titleEl == null ? void 0 : titleEl.textContent) == null ? void 0 : _a2.trim()) || ((_c2 = (_b2 = a.textContent) == null ? void 0 : _b2.trim()) == null ? void 0 : _c2.split("\n")[0]));
                   li.appendChild(newA);
                   if (descEl) {
                     const br = document.createElement("br");
                     li.appendChild(br);
-                    li.appendChild(document.createTextNode(descEl.textContent.trim()));
+                    li.appendChild(document.createTextNode(rebrandText(descEl.textContent.trim())));
                   }
                   artSubUl.appendChild(li);
                 });
@@ -114,6 +132,7 @@ var CustomImportScript = (() => {
         console.log("Nav: no .nav-menu-item found, using static link fallback");
       }
       sectionsDiv.appendChild(topUl);
+      result.appendChild(document.createElement("hr"));
       result.appendChild(sectionsDiv);
       const toolsSection = document.createElement("div");
       const subLink = navbar.querySelector(".button, .nav-subscribe");
@@ -127,6 +146,7 @@ var CustomImportScript = (() => {
         p.appendChild(strong);
         toolsSection.appendChild(p);
       }
+      result.appendChild(document.createElement("hr"));
       result.appendChild(toolsSection);
       return [{
         element: result,

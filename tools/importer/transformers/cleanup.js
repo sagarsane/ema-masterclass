@@ -2,8 +2,8 @@
 /* global WebImporter */
 
 /**
- * Transformer: WKND cleanup.
- * Removes non-authorable site chrome from the WKND source pages.
+ * Transformer: source cleanup.
+ * Removes non-authorable site chrome from the legacy source pages (wknd-adventures.com).
  * Selectors from captured DOM (migration-work/cleaned.html).
  */
 const TransformHook = { beforeTransform: 'beforeTransform', afterTransform: 'afterTransform' };

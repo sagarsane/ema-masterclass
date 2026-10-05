@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/destinations.html",
+  "path": "destinations",
+  "timestamp": "2026-09-24T21:11:45.010Z",
+  "title": "Destinations — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "featured-article",
+    "cards-article",
+    "cards-article",
+    "cards-feature"
+  ]
+}

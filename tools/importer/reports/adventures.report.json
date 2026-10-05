@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/adventures.html",
+  "path": "adventures",
+  "timestamp": "2026-09-24T21:11:13.525Z",
+  "title": "Adventures — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "tabs-activity",
+    "featured-article",
+    "editorial-index",
+    "columns-promo",
+    "cards-article"
+  ]
+}

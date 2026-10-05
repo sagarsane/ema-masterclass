@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://wknd-adventures.com/community.html",
+  "path": "community",
+  "timestamp": "2026-09-24T21:11:22.471Z",
+  "title": "Community — Rockstar Adventures",
+  "blocks": [
+    "hero",
+    "featured-article",
+    "featured-article",
+    "editorial-index",
+    "faq-list",
+    "cards-article"
+  ]
+}
